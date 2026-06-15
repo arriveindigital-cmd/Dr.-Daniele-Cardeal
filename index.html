@@ -191,7 +191,7 @@
     .badge-card { background: var(--blue); }
     .badge-reel { background: var(--rose); }
     .badge-carrossel { background: #8B6914; }
-    .badge-fixo { position: absolute; bottom: 10px; right: 10px; background: #6B4FA8; color: white; font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 9px; border-radius: 100px; }
+    .fixo-tag { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #6B4FA8; background: rgba(107,79,168,0.07); border-bottom: 1px solid rgba(107,79,168,0.18); padding: 7px 20px; }
     .pcard .thumb .scount { position: absolute; top: 10px; right: 10px; font-family: var(--font-ui); font-size: 9px; font-weight: 700; color: var(--text-dark); background: rgba(255,255,255,0.88); padding: 3px 8px; border-radius: 100px; }
     .pcard .thumb.reel-th { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, var(--bg) 0%, var(--bg-warm) 100%); }
     .reel-bi { width: 40px; height: 32px; border: 2.5px solid rgba(104,155,203,0.4); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--rose); }
@@ -470,17 +470,17 @@
       <button class="filter-btn" onclick="filter('card', this)">Cards <span class="filter-count">4</span></button>
       <button class="filter-btn" onclick="filter('carrossel', this)">Carrosséis <span class="filter-count">3</span></button>
       <button class="filter-btn" onclick="filter('reel', this)">Reels <span class="filter-count">3</span></button>
-      <button class="filter-btn" onclick="filter('fixo', this)" style="border-color:rgba(107,79,168,0.35);">📌 Fixos <span class="filter-count" style="background:rgba(107,79,168,0.12);color:#6B4FA8;">3</span></button>
+      <button class="filter-btn" onclick="filter('fixo', this)" style="border-color:rgba(107,79,168,0.35);">Fixos <span class="filter-count" style="background:rgba(107,79,168,0.12);color:#6B4FA8;">3</span></button>
     </div>
 
     <div class="posts-grid">
 
       <!-- ── POST 1: Card F3 — TEMPO para ouvir ── -->
       <div class="pcard" data-format="card fixo">
+        <div class="fixo-tag">Post fixo no perfil</div>
         <div class="thumb" onclick="lb(['Card%20F3%20-%20Posicionamento/images/card-01.png','Card%20F3%20-%20Posicionamento/images/card-02.png','Card%20F3%20-%20Posicionamento/images/card-03.png'])">
           <img src="Card%20F3%20-%20Posicionamento/images/card-01.png" alt="">
           <span class="badge badge-card">Card · F3</span>
-          <span class="badge-fixo">📌 Fixo</span>
         </div>
         <div class="cbody">
           <div class="pnum">Post 1 · 02/06 · ter · Bastidores</div>
@@ -521,11 +521,11 @@ Daniele Cardeal · A psiquiatra que acompanha.
 
       <!-- ── POST 2: Carrossel F2 — Como eu trabalho ── -->
       <div class="pcard" data-format="carrossel fixo">
+        <div class="fixo-tag">Post fixo no perfil</div>
         <div class="thumb" onclick="lb(['Carrossel%20F2/images/slide-01.png','Carrossel%20F2/images/slide-02.png','Carrossel%20F2/images/slide-03.png','Carrossel%20F2/images/slide-04.png','Carrossel%20F2/images/slide-05.png','Carrossel%20F2/images/slide-06.png'])">
           <img src="Carrossel%20F2/images/slide-01.png" alt="">
           <span class="badge badge-carrossel">Carrossel · F2</span>
           <span class="scount">6 slides</span>
-          <span class="badge-fixo">📌 Fixo</span>
         </div>
         <div class="cbody">
           <div class="pnum">Post 2 · 06/06 · sab · Bastidores</div>
@@ -663,12 +663,12 @@ Daniele Cardeal · A psiquiatra que acompanha.
 
       <!-- ── POST 5: Reel R1 — Bastidores da consulta ── -->
       <div class="pcard" data-format="reel fixo">
+        <div class="fixo-tag">Post fixo no perfil</div>
         <div class="thumb reel-th">
           <span class="badge badge-reel">Reel · R1</span>
           <div class="reel-bi">▶</div>
           <span style="font-family:var(--font-ui);font-size:13px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin-top:4px;">Bastidores</span>
           <div class="prod-label">Roteiro pronto — produção pendente</div>
-          <span class="badge-fixo">📌 Fixo</span>
         </div>
         <div class="cbody">
           <div class="pnum">Post 5 · 17/06 · ter · Bastidores</div>
