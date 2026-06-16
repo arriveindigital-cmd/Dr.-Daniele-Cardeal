@@ -2,7 +2,7 @@
 
 > **Início de publicação:** 09/06 (segunda-feira)
 > **Frequência:** ~3x por semana
-> **Total:** 11 posts — 3 fixos de posicionamento + 8 posts do mês
+> **Total:** 11 posts — 3 fixos de posicionamento + 8 posts do mês (4 cards, 2 carrosséis, 2 reels)
 > Copy de cada post gerada com `/social-copywriting` após aprovação do calendário.
 
 ---
@@ -38,6 +38,7 @@ São os 3 posts que estabelecem quem Daniele é antes de qualquer conteúdo educ
 | **13/06** (sex) | Card | **FIXO — F3** | Posicionamento | **Card de posicionamento** — declaração central. "Psiquiatria com tempo para ouvir. Acompanhamento até você não precisar mais." Visual forte, tipografia limpa. Sem explicação — a frase carrega sozinha. | Benefício + Contraste | a gerar | pendente |
 | **16/06** (seg) | Carrossel | Mês | Desmistificação | **"Vou ficar dependente do remédio?"** — maior barreira de quem busca psiquiatra. Cada slide desmonta uma versão do medo com clareza clínica e sem condescendência. | Inversão de Risco + Curiosidade + Científica | a gerar | pendente |
 | **18/06** (qua) | Card | Mês | Reconhecimento | **"Quando todos os exames dão normal e você ainda não está bem"** — para a que está no limite. Uma frase, fundo sólido, sem explicação adicional. A paciente já sabe que é sobre ela. | Dor (delicada) + Identificação | a gerar | pendente |
+| **21/06** (dom) | Card | Mês | Desmistificação | **"Psiquiatria não é para quando você está muito mal. É para quando você percebe que não está bem."** — para quem adia o tratamento por achar que "não está mal o suficiente". Card tipográfico, fundo sólido. | Reconhecimento + Disrupção | **Texto no card:** "Psiquiatria não é para quando você está muito mal. / É para quando você percebe que não está bem." **Legenda:** "Muitas mulheres chegam até mim depois de meses — às vezes anos — adiando. Esperando piorar o suficiente para 'merecer' ajuda. Esperando que o cansaço passe com férias. Esperando que os exames mostrem alguma coisa. Mas o sinal para buscar ajuda psiquiátrica não é estar no limite. É perceber que você não está bem — e não quer continuar assim. Se você está se reconhecendo aqui: link na bio." | pendente |
 | **20/06** (sex) | Reel | Mês | Bastidores | **"O que acontece numa consulta de 1 hora comigo"** — mostra o diferencial sem apresentação. Contraste real com o que a paciente provavelmente já viveu: 15 minutos, receita sem explicação, médico que não levantou os olhos. | Contraste + Autoridade | a gerar | pendente |
 | **23/06** (seg) | Card | Mês | Alta e Resultado | **"Meu objetivo é que um dia você não precise mais de mim"** — a frase mais diferenciadora do posicionamento. Foto real da Daniele ou tipografia limpa. Sem adendo — a frase fecha sozinha. | Benefício + Contraste (vs. dependência infinita) | a gerar | pendente |
 | **25/06** (qua) | Reel | Mês | Humanização / React | **React — burnout em série** — Daniele reage a uma cena de personagem em colapso emocional (The Bear, Grey's Anatomy ou similar). O olhar clínico trazido sem transformar em aula. "Como psiquiatra, o que eu vejo aqui é..." | Identificação + Conversacional | a gerar | pendente |
@@ -50,7 +51,7 @@ São os 3 posts que estabelecem quem Daniele é antes de qualquer conteúdo educ
 
 ```
 Semana 1 (09–13/06)   →  Reel fixo · Carrossel fixo · Card fixo
-Semana 2 (16–20/06)   →  Carrossel mês · Card mês · Reel mês
+Semana 2 (16–22/06)   →  Carrossel mês · Card mês · Reel mês · Card mês (sáb 21)
 Semana 3 (23–27/06)   →  Card mês · Reel mês · Card mês
 Semana 4 (30/06)      →  Carrossel mês
 ```
