@@ -191,6 +191,7 @@
     .badge-card { background: var(--blue); }
     .badge-reel { background: var(--rose); }
     .badge-carrossel { background: #8B6914; }
+    .badge-story { background: var(--gradient); }
     .fixo-tag { font-family: var(--font-ui); font-size: 9px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #6B4FA8; background: rgba(107,79,168,0.07); border-bottom: 1px solid rgba(107,79,168,0.18); padding: 7px 20px; }
     .pcard .thumb .scount { position: absolute; top: 10px; right: 10px; font-family: var(--font-ui); font-size: 9px; font-weight: 700; color: var(--text-dark); background: rgba(255,255,255,0.88); padding: 3px 8px; border-radius: 100px; }
     .pcard .thumb.reel-th { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; background: linear-gradient(135deg, var(--bg) 0%, var(--bg-warm) 100%); }
@@ -323,8 +324,8 @@
     <h1 class="reveal d1"><em>Mês 1</em><br>Daniele<br>Cardeal</h1>
     <p class="sub reveal d2">Psiquiatra · Ansiedade, depressão e burnout<br>João Pessoa/PB</p>
     <div class="meta reveal d3">
-      <div class="meta-item"><span>11</span><span>publicações</span></div>
-      <div class="meta-item"><span>3</span><span>formatos</span></div>
+      <div class="meta-item"><span>13</span><span>publicações</span></div>
+      <div class="meta-item"><span>4</span><span>formatos</span></div>
       <div class="meta-item"><span>4</span><span>territórios</span></div>
       <div class="meta-item"><span>1</span><span>CTA: agendamento</span></div>
     </div>
@@ -373,7 +374,7 @@
       <div class="section-head">
         <span class="label">Prévia do perfil</span>
         <h2>Como o feed<br>vai ficar</h2>
-        <p>Grade 4×3 · 11 publicações em ordem de postagem. 7 peças prontas no Figma + 3 reels em produção + 1 card aguardando foto.</p>
+        <p>Grade 4×3 · 11 publicações em ordem de postagem + 2 stories. 7 peças prontas no Figma + 3 reels em produção + 1 card aguardando foto.</p>
       </div>
       <div class="feed-legend">
         <div class="fl-item"><div class="fl-dot" style="background:var(--blue)"></div><div><strong>Cards</strong> — 3 mensagens diretas (prontos no Figma)</div></div>
@@ -462,16 +463,17 @@
   <div class="container">
     <div class="section-head reveal">
       <span class="label">Os conteúdos</span>
-      <h2>11 publicações</h2>
+      <h2>13 publicações</h2>
       <p>Filtre por formato. Clique em "Ver brief" para ver copy, legenda e instruções de design.</p>
     </div>
 
     <div class="filter-bar reveal d1">
-      <button class="filter-btn active" onclick="filter('todos', this)">Todos <span class="filter-count">11</span></button>
+      <button class="filter-btn active" onclick="filter('todos', this)">Todos <span class="filter-count">13</span></button>
       <button class="filter-btn" onclick="filter('card', this)">Cards <span class="filter-count">5</span></button>
       <button class="filter-btn" onclick="filter('carrossel', this)">Carrosséis <span class="filter-count">3</span></button>
       <button class="filter-btn" onclick="filter('reel', this)">Reels <span class="filter-count">3</span></button>
       <button class="filter-btn" onclick="filter('fixo', this)" style="border-color:rgba(107,79,168,0.35);">Fixos <span class="filter-count" style="background:rgba(107,79,168,0.12);color:#6B4FA8;">3</span></button>
+      <button class="filter-btn" onclick="filter('story', this)" style="border-color:rgba(240,149,170,0.35);">Stories <span class="filter-count" style="background:rgba(240,149,170,0.12);color:#c9728a;">2</span></button>
     </div>
 
     <div class="posts-grid">
@@ -999,6 +1001,64 @@ Daniele Cardeal · Psiquiatra · João Pessoa/PB</div>
         </div>
       </div>
 
+
+      <!-- ── Story S1 — Agenda aberta ── -->
+      <div class="pcard" data-format="story">
+        <div class="thumb" style="aspect-ratio:9/16;" onclick="lb(['Story%20S1%20-%20Agenda%20aberta/images/story-01.png'])">
+          <img src="Story%20S1%20-%20Agenda%20aberta/images/story-01.png" alt="">
+          <span class="badge badge-story">Story · S1</span>
+        </div>
+        <div class="cbody">
+          <div class="pnum">Story 1 · Agenda aberta</div>
+          <div class="ptitle">Agenda aberta.</div>
+          <div class="pganche">"Se você estava esperando o momento certo para dar o primeiro passo, pode ser agora."</div>
+        </div>
+        <button class="expand-btn" onclick="toggle(this)">Ver brief completo <span class="chevron">▾</span></button>
+        <div class="brief">
+          <div class="brief-section">
+            <div class="brief-lbl">Copy do story</div>
+            <div class="brief-main">
+              Agenda aberta.<br>
+              <span style="font-size:0.9em;font-weight:400;">Se você estava esperando o momento certo para dar o primeiro passo, pode ser agora.</span><br>
+              <span style="font-size:0.85em;font-weight:400;color:var(--text-dim);">→ Para agendar: link na bio</span>
+            </div>
+          </div>
+          <div class="brief-section">
+            <div class="brief-lbl">Obs. de design</div>
+            <div class="brief-note">Fundo branco, tipografia Gilda Display (título) + Cormorant (corpo). Sem elementos gráficos — design limpo. Adicionar sticker de link nativo do Instagram antes de publicar.</div>
+          </div>
+          <div class="brief-cta">Story pronto no Figma. Adicionar link de agendamento antes de publicar.</div>
+        </div>
+      </div>
+
+      <!-- ── Story S2 — Caixinha de perguntas ── -->
+      <div class="pcard" data-format="story">
+        <div class="thumb" style="aspect-ratio:9/16;" onclick="lb(['Story%20S2%20-%20Caixinha/images/story-01.png'])">
+          <img src="Story%20S2%20-%20Caixinha/images/story-01.png" alt="">
+          <span class="badge badge-story">Story · S2</span>
+        </div>
+        <div class="cbody">
+          <div class="pnum">Story 2 · Caixinha de perguntas</div>
+          <div class="ptitle">Tem uma dúvida sobre psiquiatria?</div>
+          <div class="pganche">"Remédio, diagnóstico, primeira consulta, dependência. Pode perguntar. Vou responder nos próximos stories."</div>
+        </div>
+        <button class="expand-btn" onclick="toggle(this)">Ver brief completo <span class="chevron">▾</span></button>
+        <div class="brief">
+          <div class="brief-section">
+            <div class="brief-lbl">Copy do story</div>
+            <div class="brief-main">
+              Tem uma dúvida sobre psiquiatria que você nunca soube a quem perguntar?<br>
+              <span style="font-size:0.85em;font-weight:400;color:var(--text-dim);">Remédio, diagnóstico, primeira consulta, dependência. Pode perguntar. Vou responder nos próximos stories.</span>
+            </div>
+          </div>
+          <div class="brief-section">
+            <div class="brief-lbl">Obs. de design</div>
+            <div class="brief-note">Fundo cinza (#EEF4FA), tipografia Gilda Display + Cormorant. Placeholder azul para o sticker de pergunta — substituir pelo sticker nativo do Instagram antes de publicar.</div>
+          </div>
+          <div class="brief-cta">Story pronto no Figma. Adicionar sticker de pergunta antes de publicar.</div>
+        </div>
+      </div>
+
     </div><!-- /posts-grid -->
   </div>
 </section>
@@ -1008,8 +1068,8 @@ Daniele Cardeal · Psiquiatra · João Pessoa/PB</div>
 <section id="resumo">
   <div class="container">
     <div class="nums">
-      <div class="bnum reveal"><span>11</span><span>publicações</span></div>
-      <div class="bnum reveal d1"><span>3</span><span>formatos</span></div>
+      <div class="bnum reveal"><span>13</span><span>publicações</span></div>
+      <div class="bnum reveal d1"><span>4</span><span>formatos</span></div>
       <div class="bnum reveal d2"><span>4</span><span>territórios</span></div>
       <div class="bnum reveal d3"><span>1</span><span>CTA: agendamento</span></div>
     </div>
