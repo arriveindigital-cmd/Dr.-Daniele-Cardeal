@@ -274,7 +274,8 @@
       .feed-sec .container { flex-direction: column; gap: 36px; align-items: center; }
       .pillars { grid-template-columns: 1fr 1fr; }
       .posts-grid { grid-template-columns: 1fr 1fr; }
-      .month-tabs { display: none; }
+      .month-tabs { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 999; box-shadow: 0 4px 24px rgba(0,0,0,0.18); }
+      .mtab { padding: 12px 22px; font-size: 12px; }
     }
     @media (max-width: 680px) {
       .nav { padding: 12px 20px; }
