@@ -268,14 +268,16 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 960px) {
-      section { padding: 100px 28px 64px; }
+      section { padding: 120px 28px 64px; }
       .hero-sec .content { padding: 0 28px; }
       .hero-sec .photo-side { width: 44%; }
       .feed-sec .container { flex-direction: column; gap: 36px; align-items: center; }
       .pillars { grid-template-columns: 1fr 1fr; }
       .posts-grid { grid-template-columns: 1fr 1fr; }
-      .month-tabs { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 999; box-shadow: 0 4px 24px rgba(0,0,0,0.18); }
-      .mtab { padding: 12px 22px; font-size: 12px; }
+      .nav { flex-wrap: wrap; padding: 12px 20px 0; gap: 0; }
+      .month-tabs { order: 10; width: calc(100% + 40px); margin: 10px -20px 0; border-radius: 0; background: var(--white); padding: 0; gap: 0; border-top: 1px solid var(--border); }
+      .mtab { flex: 1; border-radius: 0; padding: 12px 0; font-size: 11px; border-bottom: 2px solid transparent; }
+      .mtab.active { background: none; box-shadow: none; color: var(--blue); border-bottom: 2px solid var(--blue); }
     }
     @media (max-width: 680px) {
       .nav { padding: 12px 20px; }
