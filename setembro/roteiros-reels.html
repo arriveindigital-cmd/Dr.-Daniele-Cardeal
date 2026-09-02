@@ -1,0 +1,352 @@
+
+<title>Roteiros Reels · Setembro 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #689BCB;
+    --accent:  #F095AA;
+    --dark:    #3A4451;
+    --mid:     #566170;
+    --light:   #7A8898;
+    --bg:      #FFFFFF;
+    --bg-alt:  #F5F8FC;
+    --border:  #DDE6F0;
+    --grad:    linear-gradient(90deg, #689BCB, #F095AA);
+    --font-e:  'Cormorant Garamond', Georgia, serif;
+    --font-b:  'Source Serif 4', Georgia, serif;
+    --font-ui: 'Poppins', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:     #0F161E;
+      --bg-alt: #18222E;
+      --border: #243040;
+      --dark:   #C8D6E4;
+      --mid:    #9EB8D0;
+      --light:  #6A8FAF;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:     #0F161E;
+    --bg-alt: #18222E;
+    --border: #243040;
+    --dark:   #C8D6E4;
+    --mid:    #9EB8D0;
+    --light:  #6A8FAF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--dark);
+    font-family: var(--font-b);
+    font-size: 16px; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 720px; margin: 0 auto; padding: 56px 48px; }
+
+  /* Header */
+  .doc-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding-bottom: 32px;
+    border-bottom: 2px solid var(--border);
+    margin-bottom: 56px; flex-wrap: wrap; gap: 16px;
+  }
+  .doc-brand {
+    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .doc-title {
+    font-family: var(--font-e); font-size: 38px; font-weight: 600;
+    color: var(--dark); line-height: 1.05; text-wrap: balance;
+  }
+  .doc-meta {
+    text-align: right;
+    font-family: var(--font-ui); font-size: 11px; color: var(--light);
+    line-height: 1.8;
+  }
+  .doc-meta strong { color: var(--mid); }
+
+  /* Reel block */
+  .reel {
+    margin-bottom: 80px;
+    page-break-inside: avoid;
+  }
+  .reel + .reel {
+    padding-top: 56px;
+    border-top: 1px solid var(--border);
+    page-break-before: always;
+  }
+
+  .reel-header { margin-bottom: 28px; }
+  .reel-pills { display: flex; gap: 8px; margin-bottom: 14px; }
+  .pill {
+    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 999px; border: 1px solid;
+  }
+  .pill-reel { border-color: var(--accent); color: var(--accent); }
+  .pill-neutral { border-color: var(--border); color: var(--light); }
+  .reel-title {
+    font-family: var(--font-e); font-size: 30px; font-weight: 600;
+    color: var(--dark); line-height: 1.1; margin-bottom: 6px; text-wrap: balance;
+  }
+  .reel-date {
+    font-family: var(--font-ui); font-size: 12px; color: var(--light); font-weight: 400;
+  }
+
+  /* Sticker */
+  .sticker {
+    background: var(--bg-alt); border: 1px dashed var(--border);
+    border-radius: 10px; padding: 18px 22px;
+    margin-bottom: 28px;
+    font-family: var(--font-e); font-size: 19px; font-style: italic;
+    font-weight: 400; color: var(--mid); line-height: 1.45;
+    position: relative;
+  }
+  .sticker-label {
+    font-family: var(--font-ui); font-size: 9px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--primary); display: block; margin-bottom: 8px;
+  }
+
+  /* Roteiro */
+  .roteiro {
+    border: 1px solid var(--border); border-radius: 10px;
+    overflow: hidden; margin-bottom: 24px;
+  }
+  .roteiro-row {
+    display: grid; grid-template-columns: 64px 96px 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .roteiro-row:last-child { border-bottom: none; }
+  .roteiro-row.header-row {
+    background: var(--bg-alt);
+    font-family: var(--font-ui); font-size: 9px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--light);
+  }
+  .roteiro-cell {
+    padding: 14px 16px; border-right: 1px solid var(--border);
+    font-size: 15px; line-height: 1.6; color: var(--dark);
+  }
+  .roteiro-cell:last-child { border-right: none; }
+  .header-row .roteiro-cell { padding: 9px 16px; }
+  .time {
+    font-family: var(--font-ui); font-size: 12px; font-weight: 600;
+    color: var(--primary); font-variant-numeric: tabular-nums;
+  }
+  .sec-tag {
+    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: var(--accent); display: block; margin-bottom: 4px;
+  }
+  .roteiro-text { font-size: 15px; line-height: 1.65; }
+
+  /* Tela tags */
+  .block-label {
+    font-family: var(--font-ui); font-size: 9px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--light);
+    margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .block-label::after { content:''; flex:1; height:1px; background:var(--border); }
+  .tela-wrap { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+  .tela-tag {
+    font-family: var(--font-ui); font-size: 12px; font-weight: 500;
+    background: var(--bg-alt); border: 1px solid var(--border);
+    padding: 5px 14px; border-radius: 6px; color: var(--dark);
+  }
+
+  /* Setup */
+  .setup-box {
+    background: var(--bg-alt); border-left: 3px solid var(--primary);
+    border-radius: 0 8px 8px 0; padding: 14px 18px;
+    font-family: var(--font-ui); font-size: 13px; font-weight: 400;
+    color: var(--mid); line-height: 1.6;
+  }
+
+  /* Divider between sections */
+  .section-divider {
+    height: 2px;
+    background: var(--grad);
+    border: none; margin: 40px 0;
+    border-radius: 1px;
+  }
+
+  /* Footer */
+  .doc-footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-brand {
+    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
+    letter-spacing: .12em; text-transform: uppercase; color: var(--primary);
+  }
+  .footer-note {
+    font-family: var(--font-ui); font-size: 10px; color: var(--light);
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 12px; }
+    .page { padding: 32px 24px; }
+    .reel + .reel { page-break-before: always; }
+    .reel-title { font-size: 24px; }
+    .doc-title { font-size: 28px; }
+    .roteiro-text { font-size: 12px; }
+    .roteiro-cell { padding: 10px 12px; }
+  }
+</style>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div>
+      <p class="doc-brand">Arrive In Digital · Daniele Cardeal</p>
+      <h1 class="doc-title">Roteiros<br>Reels</h1>
+    </div>
+    <div class="doc-meta">
+      <strong>Setembro 2026 · Mês 4</strong><br>
+      2 reels<br>
+      Reel 1 — 15/09 — 60–75s<br>
+      Reel 2 — 24/09 — 60s<br>
+      <br>
+      Gravação: mesma tarde,<br>
+      setup único.
+    </div>
+  </div>
+
+  <!-- REEL 1 -->
+  <div class="reel">
+    <div class="reel-header">
+      <div class="reel-pills">
+        <span class="pill pill-reel">Reel 1 de 2</span>
+        <span class="pill pill-neutral">Desmistificação</span>
+        <span class="pill pill-neutral">60–75s</span>
+      </div>
+      <h2 class="reel-title">Seu cortisol não está alto porque você não tomou ashwagandha</h2>
+      <p class="reel-date">15 de setembro de 2026 · segunda-feira · Câmera fixa, fundo neutro ou consultório</p>
+    </div>
+
+    <div class="sticker">
+      <span class="sticker-label">Texto sticker — abertura</span>
+      "Seu cortisol não está alto porque você não tomou ashwagandha."
+    </div>
+
+    <div class="roteiro">
+      <div class="roteiro-row header-row">
+        <div class="roteiro-cell">Tempo</div>
+        <div class="roteiro-cell">Seção</div>
+        <div class="roteiro-cell">Texto — palavra por palavra</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">0–3s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Gancho</span></div>
+        <div class="roteiro-cell roteiro-text">"Em 2026, 'cortisol alto' virou o diagnóstico mais popular do Instagram. E junto veio um suplemento para vender. Vou te contar o que está errado nessa narrativa."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">3–20s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Contexto</span></div>
+        <div class="roteiro-cell roteiro-text">"O cortisol é um hormônio real. A resposta de estresse do corpo é real. O que não é real é a ideia de que você pode medir 'cortisol alto' num sintoma vago e tratar com ashwagandha. Não funciona assim. E entender como funciona de verdade importa — porque o que está acontecendo no seu corpo pode ser mais sério do que um suplemento resolve."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">20–40s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Mecanismo real</span></div>
+        <div class="roteiro-cell roteiro-text">"Quando você está em estado de alerta constante — pressão no trabalho, conflito em casa, preocupação crônica sem descanso — o sistema nervoso autônomo fica ativado por tempo prolongado. Com o tempo, isso afeta o sono, a concentração, o humor, a imunidade. Isso tem nome clínico: não é 'cortisol alto' como problema isolado. É uma resposta de estresse crônica que, sem tratamento, evolui para ansiedade, depressão ou burnout."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">40–58s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Disrupção + CTA</span></div>
+        <div class="roteiro-cell roteiro-text">"Ashwagandha não trata ansiedade. Dieta anti-inflamatória não trata burnout. Hábitos saudáveis ajudam — mas quando o sistema já entrou em colapso, o que você precisa é de avaliação médica. Não de suplemento. Se você está com insônia, dificuldade de concentração, irritabilidade que não passa: o primeiro passo é uma consulta. Link na bio."</div>
+      </div>
+    </div>
+
+    <p class="block-label">Textos de tela</p>
+    <div class="tela-wrap">
+      <span class="tela-tag">cortisol alto ≠ diagnóstico</span>
+      <span class="tela-tag">resposta de estresse crônica — isso tem nome</span>
+      <span class="tela-tag">suplemento não trata burnout</span>
+    </div>
+
+    <p class="block-label">Setup</p>
+    <div class="setup-box">Câmera fixa · fundo neutro ou consultório · tom direto e seguro, não condescendente · stickers de texto com os termos técnicos ao aparecer · duração máxima 75s</div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- REEL 2 -->
+  <div class="reel">
+    <div class="reel-header">
+      <div class="reel-pills">
+        <span class="pill pill-reel">Reel 2 de 2</span>
+        <span class="pill pill-neutral">Bastidores</span>
+        <span class="pill pill-neutral">60s</span>
+      </div>
+      <h2 class="reel-title">O que acontece entre as consultas</h2>
+      <p class="reel-date">24 de setembro de 2026 · quarta-feira · Câmera fixa, consultório</p>
+    </div>
+
+    <div class="sticker">
+      <span class="sticker-label">Texto sticker — abertura</span>
+      "O que acontece quando você sai da consulta e a próxima está marcada para daqui a 30 dias?"
+    </div>
+
+    <div class="roteiro">
+      <div class="roteiro-row header-row">
+        <div class="roteiro-cell">Tempo</div>
+        <div class="roteiro-cell">Seção</div>
+        <div class="roteiro-cell">Texto — palavra por palavra</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">0–3s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Gancho</span></div>
+        <div class="roteiro-cell roteiro-text">"O que acontece quando você sai da consulta psiquiátrica e a próxima está marcada para daqui a 30 dias?"</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">3–18s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Problema</span></div>
+        <div class="roteiro-cell roteiro-text">"Na maioria dos modelos de psiquiatria, a resposta é: nada. Você vai com o medicamento novo, com as dúvidas, com os efeitos que apareceram no meio da semana — e espera o próximo retorno. Isso tem um custo. Medicamento que gera efeito colateral às 22h vai ser tolerado ou abandonado, porque não há a quem perguntar."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">18–40s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Diferencial</span></div>
+        <div class="roteiro-cell roteiro-text">"No meu acompanhamento, funciona diferente. Você tem acesso via WhatsApp para o que surgir entre as consultas. Não é suporte 24h irrestrito. É acesso direto à psiquiatra quando o medicamento está gerando dúvida, quando algo surgiu que não esperava, quando você precisa saber se o que está sentindo é efeito da medicação ou piora do quadro. Coisas que não podem esperar 30 dias."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">40–55s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">Impacto</span></div>
+        <div class="roteiro-cell roteiro-text">"A diferença no resultado do tratamento quando existe esse suporte é real. Paciente que tem dúvida respondida não abandona o tratamento. Paciente que fica sozinha com o medicamento novo, às vezes abandona. E recomeçar do zero custa mais tempo e mais sofrimento."</div>
+      </div>
+      <div class="roteiro-row">
+        <div class="roteiro-cell"><span class="time">55–60s</span></div>
+        <div class="roteiro-cell"><span class="sec-tag">CTA</span></div>
+        <div class="roteiro-cell roteiro-text">"Se você quer entender como funciona esse modelo: link na bio."</div>
+      </div>
+    </div>
+
+    <p class="block-label">Textos de tela</p>
+    <div class="tela-wrap">
+      <span class="tela-tag">medicamento novo às 22h</span>
+      <span class="tela-tag">acesso direto entre consultas</span>
+      <span class="tela-tag">tratamento que não para no meio</span>
+    </div>
+
+    <p class="block-label">Setup</p>
+    <div class="setup-box">Câmera fixa · consultório · tom conversacional e direto, não é pitch de vendas · sem encenação · fala natural · duração máxima 60s</div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="doc-footer">
+    <span class="footer-brand">arrive in digital</span>
+    <span class="footer-note">Daniele Cardeal · Setembro 2026 · Reels 1 e 2 — gravar na mesma tarde, setup único</span>
+  </div>
+
+</div>
