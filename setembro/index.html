@@ -5,7 +5,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,300;1,500;1,600&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-  /* ── Tokens ── */
   :root {
     --primary:   #689BCB;
     --accent:    #F095AA;
@@ -15,7 +14,6 @@
     --border:    #DDE6F0;
     --text:      #3A4451;
     --text-light:#7A8898;
-    --grad:      linear-gradient(90deg, #689BCB, #F095AA);
     --font-d:    'Gilda Display', Georgia, serif;
     --font-e:    'Cormorant Garamond', Georgia, serif;
     --font-b:    'Source Serif 4', Georgia, serif;
@@ -25,387 +23,127 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg:       #111820;
-      --bg-alt:   #192230;
-      --border:   #253344;
-      --text:     #D4DDE8;
-      --text-light:#7A92A8;
-      --dark:     #9EB8D0;
-      --shadow:   0 2px 16px rgba(0,0,0,.35);
+      --bg:#111820; --bg-alt:#192230; --border:#253344;
+      --text:#D4DDE8; --text-light:#7A92A8; --dark:#9EB8D0;
+      --shadow:0 2px 16px rgba(0,0,0,.35);
     }
   }
   :root[data-theme="dark"] {
-    --bg:       #111820;
-    --bg-alt:   #192230;
-    --border:   #253344;
-    --text:     #D4DDE8;
-    --text-light:#7A92A8;
-    --dark:     #9EB8D0;
-    --shadow:   0 2px 16px rgba(0,0,0,.35);
+    --bg:#111820; --bg-alt:#192230; --border:#253344;
+    --text:#D4DDE8; --text-light:#7A92A8; --dark:#9EB8D0;
+    --shadow:0 2px 16px rgba(0,0,0,.35);
   }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;}
 
-  /* ── Reset ── */
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-b);
-    font-size: 16px;
-    line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
+  nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:4px;padding:0 32px;height:52px;box-shadow:var(--shadow);}
+  .nav-brand{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);white-space:nowrap;margin-right:20px;}
+  .nav-links{display:flex;gap:2px;flex-wrap:wrap;list-style:none;flex:1;}
+  .nav-links a{display:block;padding:4px 10px;font-family:var(--font-ui);font-size:11px;font-weight:500;color:var(--text-light);text-decoration:none;border-radius:6px;transition:background .15s,color .15s;}
+  .nav-links a:hover{background:var(--bg-alt);color:var(--primary);}
+  .nav-month{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);white-space:nowrap;}
 
-  /* ── Nav ── */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center;
-    gap: 4px;
-    padding: 0 32px;
-    height: 52px;
-    box-shadow: var(--shadow);
-  }
-  .nav-brand {
-    font-family: var(--font-ui);
-    font-size: 11px; font-weight: 600;
-    letter-spacing: .12em; text-transform: uppercase;
-    color: var(--primary); white-space: nowrap;
-    margin-right: 20px;
-  }
-  .nav-links {
-    display: flex; gap: 2px; flex-wrap: wrap;
-    list-style: none; flex: 1;
-  }
-  .nav-links a {
-    display: block;
-    padding: 4px 10px;
-    font-family: var(--font-ui); font-size: 11px; font-weight: 500;
-    color: var(--text-light);
-    text-decoration: none; border-radius: 6px;
-    transition: background .15s, color .15s;
-  }
-  .nav-links a:hover { background: var(--bg-alt); color: var(--primary); }
-  .nav-month {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--text-light); white-space: nowrap;
-  }
+  .container{max-width:860px;margin:0 auto;padding:0 40px;}
 
-  /* ── Container ── */
-  .container { max-width: 860px; margin: 0 auto; padding: 0 40px; }
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--border);}
+  .hero-eyebrow{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--primary);margin-bottom:20px;}
+  .hero h1{font-family:var(--font-d);font-size:56px;font-weight:400;color:var(--text);line-height:1.05;text-wrap:balance;margin-bottom:14px;}
+  .hero-sub{font-family:var(--font-e);font-size:22px;font-weight:300;font-style:italic;color:var(--text-light);margin-bottom:40px;}
+  .hero-stats{display:flex;gap:32px;flex-wrap:wrap;}
+  .stat{display:flex;flex-direction:column;gap:2px;}
+  .stat-n{font-family:var(--font-d);font-size:32px;color:var(--primary);line-height:1;}
+  .stat-l{font-family:var(--font-ui);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--text-light);}
+  .hero-focus{margin-top:40px;padding:20px 24px;background:var(--bg-alt);border-radius:var(--radius);border-left:3px solid var(--primary);font-family:var(--font-e);font-size:18px;font-style:italic;color:var(--text);font-weight:300;line-height:1.5;}
 
-  /* ── Hero ── */
-  .hero {
-    padding: 72px 0 56px;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-eyebrow {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 600;
-    letter-spacing: .14em; text-transform: uppercase;
-    color: var(--primary); margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-family: var(--font-d); font-size: 56px; font-weight: 400;
-    color: var(--text); line-height: 1.05;
-    text-wrap: balance; margin-bottom: 14px;
-  }
-  .hero-sub {
-    font-family: var(--font-e); font-size: 22px; font-weight: 300;
-    font-style: italic; color: var(--text-light);
-    margin-bottom: 40px;
-  }
-  .hero-stats {
-    display: flex; gap: 32px; flex-wrap: wrap;
-  }
-  .stat {
-    display: flex; flex-direction: column; gap: 2px;
-  }
-  .stat-n {
-    font-family: var(--font-d); font-size: 32px; color: var(--primary);
-    line-height: 1;
-  }
-  .stat-l {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 500;
-    text-transform: uppercase; letter-spacing: .08em; color: var(--text-light);
-  }
-  .hero-focus {
-    margin-top: 40px;
-    padding: 20px 24px;
-    background: var(--bg-alt); border-radius: var(--radius);
-    border-left: 3px solid var(--primary);
-    font-family: var(--font-e); font-size: 18px; font-style: italic;
-    color: var(--text); font-weight: 300;
-    line-height: 1.5;
-  }
+  .feed-section{padding:56px 0;border-bottom:1px solid var(--border);}
+  .feed-section h2{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);margin-bottom:24px;}
+  .feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;}
+  .feed-cell{aspect-ratio:1;background:var(--bg-alt);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;text-decoration:none;cursor:pointer;transition:opacity .15s;}
+  .feed-cell:hover{opacity:.8;}
+  .feed-cell img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+  .feed-cell-n{font-family:var(--font-d);font-size:28px;color:var(--primary);line-height:1;}
+  .feed-cell-date{font-family:var(--font-ui);font-size:10px;font-weight:500;color:var(--text-light);margin-top:4px;}
+  .feed-pill{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-family:var(--font-ui);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap;z-index:2;}
+  .pill-card{background:rgba(104,155,203,.85);color:#fff;}
+  .pill-reel{background:rgba(240,149,170,.85);color:#fff;}
+  .pill-carrossel{background:rgba(86,97,112,.75);color:#fff;}
+  .feed-cell-icon{font-size:18px;margin-bottom:4px;opacity:.4;}
 
-  /* ── Feed grid ── */
-  .feed-section { padding: 56px 0; border-bottom: 1px solid var(--border); }
-  .feed-section h2 {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 600;
-    letter-spacing: .12em; text-transform: uppercase;
-    color: var(--text-light); margin-bottom: 24px;
-  }
-  .feed-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 4px;
-  }
-  .feed-cell {
-    aspect-ratio: 1;
-    background: var(--bg-alt);
-    border-radius: 4px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    position: relative; overflow: hidden;
-    text-decoration: none; cursor: pointer;
-    transition: opacity .15s;
-  }
-  .feed-cell:hover { opacity: .8; }
-  .feed-cell-n {
-    font-family: var(--font-d); font-size: 28px; color: var(--primary);
-    line-height: 1;
-  }
-  .feed-cell-date {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 500;
-    color: var(--text-light); margin-top: 4px;
-  }
-  .feed-pill {
-    position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-    font-family: var(--font-ui); font-size: 9px; font-weight: 600;
-    letter-spacing: .08em; text-transform: uppercase;
-    padding: 2px 8px; border-radius: 999px;
-    white-space: nowrap;
-  }
-  .pill-card { background: rgba(104,155,203,.15); color: var(--primary); }
-  .pill-reel { background: rgba(240,149,170,.15); color: var(--accent); }
-  .pill-carrossel { background: rgba(86,97,112,.12); color: var(--dark); }
-  .feed-cell-icon {
-    font-size: 18px; margin-bottom: 4px; opacity: .4;
-  }
+  .post-section{padding:64px 0;border-bottom:1px solid var(--border);position:relative;}
+  .post-section::before{content:'';position:absolute;left:-40px;top:64px;width:3px;height:calc(100% - 128px);border-radius:2px;}
+  .bookmark-card::before{background:var(--primary);}
+  .bookmark-reel::before{background:var(--accent);}
+  .bookmark-carrossel::before{background:var(--dark);}
 
-  /* ── Post sections ── */
-  .post-section {
-    padding: 64px 0;
-    border-bottom: 1px solid var(--border);
-    page-break-before: always;
-    position: relative;
-  }
-  .post-section::before {
-    content: '';
-    position: absolute; left: -40px; top: 64px;
-    width: 3px; height: calc(100% - 128px);
-    border-radius: 2px;
-  }
-  .bookmark-card::before { background: var(--primary); }
-  .bookmark-reel::before { background: var(--accent); }
-  .bookmark-carrossel::before { background: var(--dark); }
+  .post-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:32px;flex-wrap:wrap;}
+  .post-meta{display:flex;flex-direction:column;gap:8px;}
+  .post-pills{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+  .pill{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:999px;border:1px solid;}
+  .pill-primary{border-color:var(--primary);color:var(--primary);}
+  .pill-accent{border-color:var(--accent);color:var(--accent);}
+  .pill-neutral{border-color:var(--border);color:var(--text-light);}
+  .post-date{font-family:var(--font-ui);font-size:11px;font-weight:500;color:var(--text-light);}
+  .post-num{font-family:var(--font-ui);font-size:11px;font-weight:500;color:var(--text-light);text-align:right;white-space:nowrap;}
+  .post-title{font-family:var(--font-d);font-size:36px;font-weight:400;color:var(--text);line-height:1.1;text-wrap:balance;margin-bottom:8px;}
+  .post-subtitle{font-family:var(--font-e);font-size:18px;font-style:italic;color:var(--text-light);font-weight:300;}
 
-  .post-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 16px; margin-bottom: 32px; flex-wrap: wrap;
-  }
-  .post-meta { display: flex; flex-direction: column; gap: 8px; }
-  .post-pills { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .pill {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    padding: 3px 10px; border-radius: 999px;
-    border: 1px solid;
-  }
-  .pill-primary { border-color: var(--primary); color: var(--primary); }
-  .pill-accent  { border-color: var(--accent);  color: var(--accent); }
-  .pill-neutral { border-color: var(--border);  color: var(--text-light); }
-  .post-date {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 500;
-    color: var(--text-light);
-  }
-  .post-num {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 500;
-    color: var(--text-light); text-align: right; white-space: nowrap;
-  }
-  .post-title {
-    font-family: var(--font-d); font-size: 36px; font-weight: 400;
-    color: var(--text); line-height: 1.1; text-wrap: balance;
-    margin-bottom: 8px;
-  }
-  .post-subtitle {
-    font-family: var(--font-e); font-size: 18px; font-style: italic;
-    color: var(--text-light); font-weight: 300;
-  }
+  .block{margin-bottom:32px;}
+  .block-label{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+  .block-label::after{content:'';flex:1;height:1px;background:var(--border);}
 
-  /* ── Content blocks ── */
-  .block { margin-bottom: 32px; }
-  .block-label {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .14em; text-transform: uppercase;
-    color: var(--text-light); margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .block-label::after {
-    content: ''; flex: 1; height: 1px; background: var(--border);
-  }
+  .post-img{width:100%;max-width:480px;border-radius:var(--radius);display:block;box-shadow:var(--shadow);}
 
-  .card-text {
-    background: var(--bg-alt); border-radius: var(--radius);
-    padding: 28px 32px; border: 1px solid var(--border);
-  }
-  .card-hero {
-    font-family: var(--font-d); font-size: 44px; line-height: 1;
-    color: var(--text); margin-bottom: 12px;
-  }
-  .card-tag {
-    font-family: var(--font-e); font-size: 22px; font-style: italic;
-    font-weight: 300; color: var(--text-light); margin-bottom: 16px;
-  }
-  .card-body {
-    font-family: var(--font-b); font-size: 16px; color: var(--text);
-    line-height: 1.6; border-top: 1px solid var(--border); padding-top: 16px;
-  }
+  .slides-gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+  .slides-gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block;transition:opacity .15s;}
+  .slides-gallery img:hover{opacity:.85;}
 
-  .legenda {
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 24px 28px;
-    font-size: 16px; line-height: 1.7; white-space: pre-line;
-  }
-  .legenda strong { color: var(--primary); font-weight: 600; }
+  .legenda{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;font-size:16px;line-height:1.7;white-space:pre-line;}
+  .legenda strong{color:var(--primary);font-weight:600;}
 
-  .obs-box {
-    background: var(--bg-alt); border-radius: 8px;
-    padding: 16px 20px;
-    font-family: var(--font-ui); font-size: 13px; line-height: 1.6;
-    color: var(--dark); border-left: 2px solid var(--primary);
-  }
+  .obs-box{background:var(--bg-alt);border-radius:8px;padding:16px 20px;font-family:var(--font-ui);font-size:13px;line-height:1.6;color:var(--dark);border-left:2px solid var(--primary);}
 
-  /* ── Reel roteiro ── */
-  .roteiro-table { width: 100%; border-collapse: collapse; }
-  .roteiro-table th {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--text-light); text-align: left;
-    padding: 8px 12px; border-bottom: 2px solid var(--border);
-  }
-  .roteiro-table td {
-    padding: 14px 12px; vertical-align: top;
-    border-bottom: 1px solid var(--border);
-    font-size: 15px; line-height: 1.6; color: var(--text);
-  }
-  .roteiro-table tr:last-child td { border-bottom: none; }
-  .time-cell {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 600;
-    color: var(--primary); white-space: nowrap; min-width: 56px;
-  }
-  .section-label {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--accent); display: block; margin-bottom: 4px;
-  }
-  .sticker-box {
-    background: var(--bg-alt); border-radius: 8px;
-    padding: 16px 20px;
-    font-family: var(--font-e); font-size: 18px; font-style: italic;
-    font-weight: 300; color: var(--text);
-    border: 1px dashed var(--border);
-    margin-bottom: 8px;
-  }
-  .tela-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-  .tela-tag {
-    font-family: var(--font-ui); font-size: 12px; font-weight: 500;
-    background: var(--bg-alt); border: 1px solid var(--border);
-    padding: 4px 12px; border-radius: 6px; color: var(--text);
-  }
+  .roteiro-table{width:100%;border-collapse:collapse;}
+  .roteiro-table th{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);}
+  .roteiro-table td{padding:14px 12px;vertical-align:top;border-bottom:1px solid var(--border);font-size:15px;line-height:1.6;color:var(--text);}
+  .roteiro-table tr:last-child td{border-bottom:none;}
+  .time-cell{font-family:var(--font-ui);font-size:11px;font-weight:600;color:var(--primary);white-space:nowrap;min-width:56px;}
+  .section-label{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:4px;}
+  .sticker-box{background:var(--bg-alt);border-radius:8px;padding:16px 20px;font-family:var(--font-e);font-size:18px;font-style:italic;font-weight:300;color:var(--text);border:1px dashed var(--border);}
+  .tela-tags{display:flex;gap:8px;flex-wrap:wrap;}
+  .tela-tag{font-family:var(--font-ui);font-size:12px;font-weight:500;background:var(--bg-alt);border:1px solid var(--border);padding:4px 12px;border-radius:6px;color:var(--text);}
 
-  /* ── Slides table ── */
-  .slides-table { width: 100%; border-collapse: collapse; }
-  .slides-table th {
-    font-family: var(--font-ui); font-size: 10px; font-weight: 600;
-    letter-spacing: .1em; text-transform: uppercase;
-    color: var(--text-light); text-align: left;
-    padding: 8px 12px; border-bottom: 2px solid var(--border);
-  }
-  .slides-table td {
-    padding: 12px; vertical-align: top;
-    border-bottom: 1px solid var(--border);
-    font-size: 15px; line-height: 1.6; color: var(--text);
-  }
-  .slides-table tr:last-child td { border-bottom: none; }
-  .slide-n {
-    font-family: var(--font-ui); font-size: 12px; font-weight: 700;
-    color: var(--primary); white-space: nowrap;
-  }
-  .slide-name {
-    font-family: var(--font-ui); font-size: 12px; font-weight: 500;
-    color: var(--text-light);
-  }
-  .slide-capa { background: var(--bg-alt); }
-  .slide-cta { background: var(--bg-alt); }
+  .slides-table{width:100%;border-collapse:collapse;}
+  .slides-table th{font-family:var(--font-ui);font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text-light);text-align:left;padding:8px 12px;border-bottom:2px solid var(--border);}
+  .slides-table td{padding:12px;vertical-align:top;border-bottom:1px solid var(--border);font-size:15px;line-height:1.6;color:var(--text);}
+  .slides-table tr:last-child td{border-bottom:none;}
+  .slide-n{font-family:var(--font-ui);font-size:12px;font-weight:700;color:var(--primary);white-space:nowrap;}
+  .slide-name{font-family:var(--font-ui);font-size:12px;font-weight:500;color:var(--text-light);}
+  .slide-capa{background:var(--bg-alt);}
+  .slide-cta{background:var(--bg-alt);}
 
-  /* ── CTA block ── */
-  .cta-block {
-    background: var(--bg-alt);
-    border-radius: var(--radius);
-    padding: 20px 24px;
-    border-top: 2px solid;
-    border-image: var(--grad) 1;
-    margin-top: 8px;
-  }
-  .cta-block p {
-    font-family: var(--font-ui); font-size: 14px; font-weight: 500;
-    color: var(--text);
-  }
+  footer{padding:48px 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .footer-brand{font-family:var(--font-ui);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);}
+  .footer-copy{font-family:var(--font-ui);font-size:11px;color:var(--text-light);text-align:right;}
 
-  /* ── Footer ── */
-  footer {
-    padding: 48px 0;
-    border-top: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 16px; flex-wrap: wrap;
-  }
-  .footer-brand {
-    font-family: var(--font-ui); font-size: 11px; font-weight: 600;
-    letter-spacing: .12em; text-transform: uppercase; color: var(--primary);
-  }
-  .footer-copy {
-    font-family: var(--font-ui); font-size: 11px; color: var(--text-light);
-    text-align: right;
-  }
-
-  /* ── Print ── */
-  @media print {
-    nav { display: none; }
-    .post-section { page-break-before: always; }
-    .hero { page-break-before: avoid; }
-    .feed-section { page-break-after: always; }
-    .post-section::before { display: none; }
-    body { font-size: 13px; }
-    .hero h1 { font-size: 40px; }
-    .post-title { font-size: 28px; }
-  }
-
-  /* ── Gradient text utility ── */
-  .grad-text {
-    background: var(--grad); -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; background-clip: text;
+  @media print{
+    nav{display:none;}
+    .post-section{page-break-before:always;}
+    .hero,.feed-section{page-break-after:always;}
+    .post-section::before{display:none;}
   }
 </style>
 
-<!-- NAV -->
 <nav>
   <span class="nav-brand">arrive in digital</span>
   <ul class="nav-links">
-    <li><a href="#c1">C1</a></li>
-    <li><a href="#c2">C2</a></li>
-    <li><a href="#c3">C3</a></li>
-    <li><a href="#c4">C4</a></li>
-    <li><a href="#c5">C5</a></li>
-    <li><a href="#c6">C6</a></li>
-    <li><a href="#c7">C7</a></li>
-    <li><a href="#c8">C8</a></li>
+    <li><a href="#c1">C1</a></li><li><a href="#c2">C2</a></li><li><a href="#c3">C3</a></li>
+    <li><a href="#c4">C4</a></li><li><a href="#c5">C5</a></li><li><a href="#c6">C6</a></li>
+    <li><a href="#c7">C7</a></li><li><a href="#c8">C8</a></li>
   </ul>
   <span class="nav-month">Setembro 2026</span>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="container">
     <p class="hero-eyebrow">Planejamento Editorial · Mês 4</p>
@@ -418,60 +156,51 @@
       <div class="stat"><span class="stat-n">2</span><span class="stat-l">Carrosseis</span></div>
     </div>
     <div class="hero-focus">
-      Setembro Amarelo com ângulo específico — todo o mercado posta laço amarelo. Daniele entra com dados frescos, autoridade clínica e o que ela oferece de diferente: acompanhamento real, antes da crise.
+      Setembro Amarelo com ângulo específico — todo o mercado posta laço amarelo e checklist de sintomas. Daniele entra com dados frescos, autoridade clínica e o que ela oferece de diferente: acompanhamento real, antes da crise.
     </div>
   </div>
 </section>
 
-<!-- FEED GRID -->
 <section class="feed-section">
   <div class="container">
     <h2>Visão de feed — Setembro</h2>
     <div class="feed-grid">
       <a class="feed-cell bookmark-card" href="#c1">
-        <span class="feed-cell-n">1</span>
-        <span class="feed-cell-date">02/09</span>
+        <img src="./Card P1 - CORPO/images/card-01.png" alt="Post 1">
         <span class="feed-pill pill-card">Card</span>
       </a>
       <a class="feed-cell bookmark-carrossel" href="#c2">
-        <span class="feed-cell-n">2</span>
-        <span class="feed-cell-date">09/09</span>
+        <img src="./Carrossel P2 - Bastidores/images/slide-01.png" alt="Post 2">
         <span class="feed-pill pill-carrossel">Carrossel</span>
       </a>
       <a class="feed-cell bookmark-card" href="#c3">
-        <span class="feed-cell-n">3</span>
-        <span class="feed-cell-date">11/09</span>
+        <img src="./Card P3 - SETEMBRO/images/card-01.png" alt="Post 3">
         <span class="feed-pill pill-card">Card</span>
       </a>
       <a class="feed-cell bookmark-reel" href="#c4">
         <span class="feed-cell-icon">▶</span>
-        <span class="feed-cell-n">4</span>
-        <span class="feed-cell-date">15/09</span>
+        <span class="feed-cell-n">4</span><span class="feed-cell-date">15/09</span>
         <span class="feed-pill pill-reel">Reel</span>
       </a>
       <a class="feed-cell bookmark-carrossel" href="#c5">
-        <span class="feed-cell-n">5</span>
-        <span class="feed-cell-date">17/09</span>
+        <img src="./Carrossel P5 - NR1/images/slide-01.png" alt="Post 5">
         <span class="feed-pill pill-carrossel">Carrossel</span>
       </a>
       <a class="feed-cell bookmark-card" href="#c6">
-        <span class="feed-cell-n">6</span>
-        <span class="feed-cell-date">22/09</span>
+        <img src="./Card P6 - MAE/images/card-01.png" alt="Post 6">
         <span class="feed-pill pill-card">Card</span>
       </a>
       <a class="feed-cell bookmark-reel" href="#c7">
         <span class="feed-cell-icon">▶</span>
-        <span class="feed-cell-n">7</span>
-        <span class="feed-cell-date">24/09</span>
+        <span class="feed-cell-n">7</span><span class="feed-cell-date">24/09</span>
         <span class="feed-pill pill-reel">Reel</span>
       </a>
       <a class="feed-cell bookmark-card" href="#c8">
-        <span class="feed-cell-n">8</span>
-        <span class="feed-cell-date">29/09</span>
+        <img src="./Card P8 - ALEM/images/card-01.png" alt="Post 8">
         <span class="feed-pill pill-card">Card</span>
       </a>
-      <div class="feed-cell" style="opacity:.25;cursor:default;">
-        <span class="feed-cell-date" style="font-size:18px;">—</span>
+      <div class="feed-cell" style="opacity:.15;cursor:default;">
+        <span style="font-size:20px;color:var(--text-light);">—</span>
       </div>
     </div>
   </div>
@@ -482,26 +211,17 @@
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-primary">Card</span>
-          <span class="pill pill-neutral">Reconhecimento</span>
-        </div>
+        <div class="post-pills"><span class="pill pill-primary">Card</span><span class="pill pill-neutral">Reconhecimento</span></div>
         <p class="post-date">02 de setembro de 2026 · quarta-feira</p>
       </div>
       <p class="post-num">Post 1 de 8</p>
     </div>
     <h2 class="post-title">Aviso que o corpo deu</h2>
     <p class="post-subtitle">346 mil mulheres afastadas em 2025. A maioria só parou quando não teve alternativa.</p>
-
     <div class="block">
-      <p class="block-label">Texto no card</p>
-      <div class="card-text">
-        <p class="card-hero">AVISO</p>
-        <p class="card-tag">que o corpo deu.</p>
-        <div class="card-body">O afastamento não é o início do cuidado.<br>Pode vir antes.</div>
-      </div>
+      <p class="block-label">Arte do card</p>
+      <img class="post-img" src="./Card P1 - CORPO/images/card-01.png" alt="Card P1">
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
       <div class="legenda">346 mil mulheres foram afastadas do trabalho por depressão e ansiedade em 2025.
@@ -516,103 +236,65 @@ Se você está nesse caminho e ainda está funcionando: link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Fundo: foto editorial consultório ou lifestyle feminino adulto, luz fria. Tom sóbrio — setembro é mês de campanha, o card precisa ter peso sem ser pesado. Hero word AVISO em Gilda Display, tamanho máximo.</div>
-    </div>
   </div>
 </section>
 
-<!-- POST 2 -->
+<!-- POST 2 — CA1 Bastidores -->
 <section class="post-section bookmark-carrossel" id="c2">
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-neutral">Carrossel</span>
-          <span class="pill pill-neutral">Reconhecimento</span>
-        </div>
-        <p class="post-date">09 de setembro de 2026 · quarta-feira</p>
+        <div class="post-pills"><span class="pill pill-neutral">Carrossel · CA1</span><span class="pill pill-neutral">Bastidores</span></div>
+        <p class="post-date">09 de setembro de 2026 · quarta-feira · 8 slides</p>
       </div>
       <p class="post-num">Post 2 de 8</p>
     </div>
-    <h2 class="post-title">O sofrimento antes da crise</h2>
-    <p class="post-subtitle">Setembro Amarelo virado para dentro: os anos de normalização antes de pedir ajuda.</p>
-
+    <h2 class="post-title">Bastidores do acompanhamento</h2>
+    <p class="post-subtitle">O que realmente acontece antes, durante e depois de uma consulta psiquiátrica com a Daniele.</p>
     <div class="block">
-      <p class="block-label">Slides — copy para o designer</p>
+      <p class="block-label">Arte dos slides</p>
+      <div class="slides-gallery">
+        <img src="./Carrossel P2 - Bastidores/images/slide-01.png" alt="Slide 1">
+        <img src="./Carrossel P2 - Bastidores/images/slide-02.png" alt="Slide 2">
+        <img src="./Carrossel P2 - Bastidores/images/slide-03.png" alt="Slide 3">
+        <img src="./Carrossel P2 - Bastidores/images/slide-04.png" alt="Slide 4">
+        <img src="./Carrossel P2 - Bastidores/images/slide-05.png" alt="Slide 5">
+        <img src="./Carrossel P2 - Bastidores/images/slide-06.png" alt="Slide 6">
+        <img src="./Carrossel P2 - Bastidores/images/slide-07.png" alt="Slide 7">
+        <img src="./Carrossel P2 - Bastidores/images/slide-08.png" alt="Slide 8">
+      </div>
+    </div>
+    <div class="block">
+      <p class="block-label">Copy — slide a slide</p>
       <div style="overflow-x:auto;">
         <table class="slides-table">
-          <thead>
-            <tr><th>#</th><th>Nome</th><th>Conteúdo</th></tr>
-          </thead>
+          <thead><tr><th>#</th><th>Nome</th><th>Conteúdo</th></tr></thead>
           <tbody>
-            <tr class="slide-capa">
-              <td><span class="slide-n">01</span></td>
-              <td><span class="slide-name">Capa / Abertura</span></td>
-              <td>"O Setembro Amarelo fala em escutar o outro.<br>Mas quem te ouve quando você mesma<br>não consegue nomear o que está sentindo?"</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">02</span></td>
-              <td><span class="slide-name">Contexto</span></td>
-              <td>"Antes de chegar num consultório,<br>a maioria das mulheres que atendo<br>passou anos normalizando o que sentia."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">03</span></td>
-              <td><span class="slide-name">O que diziam — cansaço</span></td>
-              <td>"'Estou só cansada.'<br>Dormia mal havia mais de um ano."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">04</span></td>
-              <td><span class="slide-name">O que diziam — exames</span></td>
-              <td>"'Não é nada, vai passar.'<br>Os exames voltavam normais.<br>O corpo não melhorava."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">05</span></td>
-              <td><span class="slide-name">O que diziam — tempo</span></td>
-              <td>"'Não tenho tempo para isso.'<br>Tinha.<br>O burnout roubou a capacidade de se priorizar."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">06</span></td>
-              <td><span class="slide-name">O que diziam — comparação</span></td>
-              <td>"'Outras pessoas têm problemas maiores.'<br>Comparar a própria dor com a dor dos outros<br>não resolve a dor de ninguém."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">07</span></td>
-              <td><span class="slide-name">Virada</span></td>
-              <td>"O sofrimento que você minimiza agora<br>é o afastamento que pode acontecer depois.<br>Buscar ajuda não é fraqueza.<br>É o contrário do afastamento."</td>
-            </tr>
-            <tr class="slide-cta">
-              <td><span class="slide-n">08</span></td>
-              <td><span class="slide-name">CTA / Assinatura</span></td>
-              <td>Daniele Cardeal · A psiquiatra que acompanha.<br>Agendamento: link na bio.</td>
-            </tr>
+            <tr class="slide-capa"><td><span class="slide-n">01</span></td><td><span class="slide-name">Capa</span></td><td>"O que ninguém te conta antes da primeira consulta."</td></tr>
+            <tr><td><span class="slide-n">02</span></td><td><span class="slide-name">A primeira vez</span></td><td>"A primeira consulta não é para eu te dar um diagnóstico.<br>É para eu te ouvir.<br>Tudo que você está sentindo, há quanto tempo, o que já tentou."</td></tr>
+            <tr><td><span class="slide-n">03</span></td><td><span class="slide-name">A avaliação</span></td><td>"Antes de qualquer medicação:<br>uma avaliação completa.<br>Porque cada quadro é diferente — e tratar sem avaliar é adivinhar."</td></tr>
+            <tr><td><span class="slide-n">04</span></td><td><span class="slide-name">A medicação</span></td><td>"Medicação não é a solução.<br>É parte de uma estratégia.<br>Ajusta o sistema para que o cuidado — o trabalho real — possa acontecer."</td></tr>
+            <tr><td><span class="slide-n">05</span></td><td><span class="slide-name">O WhatsApp</span></td><td>"O que acontece quando o medicamento gera efeito colateral às 22h?<br>No meu acompanhamento: você me manda uma mensagem.<br>Porque 30 dias é tempo demais para esperar."</td></tr>
+            <tr><td><span class="slide-n">06</span></td><td><span class="slide-name">Os retornos</span></td><td>"Os retornos não são para verificar se você tomou o remédio.<br>São para ajustar o que precisa ser ajustado, no tempo certo."</td></tr>
+            <tr><td><span class="slide-n">07</span></td><td><span class="slide-name">A alta</span></td><td>"A alta não é o fim.<br>É o objetivo desde o início.<br>Acompanhamento psiquiátrico tem começo, meio e fim — e fim é uma conquista."</td></tr>
+            <tr class="slide-cta"><td><span class="slide-n">08</span></td><td><span class="slide-name">CTA</span></td><td>Daniele Cardeal · A psiquiatra que acompanha.<br>Agendamento: link na bio.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
-      <div class="legenda">O tema do Setembro Amarelo 2026 é "Escutar é estar presente".
+      <div class="legenda">O que acontece numa consulta psiquiátrica é diferente do que a maioria imagina.
 
-É um bom tema. Mas falta o próximo passo: e quando a pessoa a ser escutada é você mesma?
+Não começa com diagnóstico. Não começa com receita. Começa com escuta — o que está acontecendo, há quanto tempo, o que você já tentou.
 
-Antes de buscar ajuda, existe um período de normalização que pode durar meses ou anos. "É só estresse." "Não é nada sério." "Outras pessoas têm problemas maiores."
+Esse carrossel mostra como funciona o meu modelo de acompanhamento: da primeira consulta até a alta.
 
-Esse carrossel é para quem está nesse período agora.
-
-O que você está sentindo é real — e não precisa chegar num colapso para merecer atenção.
+Para quem está na dúvida se é "hora de ir": é.
 
 Link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
-    </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Slide 1: Cormorant Garamond Medium Italic, fundo #689BCB (azul da marca), texto branco. Slides 2–6: alternância branco / #EEF4FA, Source Serif 4. Slide 7: fundo #1C2B3A (escuro), texto branco — virada. Slide 8: gradiente azul→rosa, assinatura.</div>
     </div>
   </div>
 </section>
@@ -622,26 +304,17 @@ Link na bio.
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-primary">Card</span>
-          <span class="pill pill-neutral">Setembro Amarelo</span>
-        </div>
+        <div class="post-pills"><span class="pill pill-primary">Card</span><span class="pill pill-neutral">Setembro Amarelo</span></div>
         <p class="post-date">11 de setembro de 2026 · quinta-feira · Dia Mundial de Prevenção ao Suicídio +1</p>
       </div>
       <p class="post-num">Post 3 de 8</p>
     </div>
     <h2 class="post-title">O que ninguém fala no Setembro</h2>
     <p class="post-subtitle">A crise raramente chega do nada — chega depois de meses de "estou bem" que não eram verdade.</p>
-
     <div class="block">
-      <p class="block-label">Texto no card</p>
-      <div class="card-text">
-        <p class="card-hero">SETEMBRO.</p>
-        <p class="card-tag">o que ninguém fala.</p>
-        <div class="card-body">A crise raramente chega do nada.<br>Chega depois de meses de "estou bem"<br>que não eram verdade.</div>
-      </div>
+      <p class="block-label">Arte do card</p>
+      <img class="post-img" src="./Card P3 - SETEMBRO/images/card-01.png" alt="Card P3">
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
       <div class="legenda">Hoje é o Dia Mundial de Prevenção ao Suicídio.
@@ -658,170 +331,138 @@ Para acompanhamento psiquiátrico: link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Fundo escuro (#1C2B3A) — único card do mês com fundo escuro para marcar o tema. Hero word SETEMBRO em Gilda Display, cor branca ou azul claro. Sem foto editorial. Tom gráfico, sóbrio.</div>
-    </div>
   </div>
 </section>
 
-<!-- POST 4 -->
+<!-- POST 4 — REEL SETEMBRO AMARELO -->
 <section class="post-section bookmark-reel" id="c4">
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-accent">Reel</span>
-          <span class="pill pill-neutral">Desmistificação</span>
-        </div>
-        <p class="post-date">15 de setembro de 2026 · segunda-feira · 60–75s</p>
+        <div class="post-pills"><span class="pill pill-accent">Reel</span><span class="pill pill-neutral">Setembro Amarelo</span><span class="pill pill-neutral">65s</span></div>
+        <p class="post-date">15 de setembro de 2026 · segunda-feira · 60–70s</p>
       </div>
       <p class="post-num">Post 4 de 8</p>
     </div>
-    <h2 class="post-title">Seu cortisol não está alto porque você não tomou ashwagandha</h2>
-    <p class="post-subtitle">Autoridade clínica contra a narrativa do "cortisol alto" que saturou o Instagram em 2026.</p>
-
+    <h2 class="post-title">O que muda no consultório em setembro</h2>
+    <p class="post-subtitle">Avatar: a mulher que ainda está funcionando mas decidiu usar o Setembro Amarelo como janela.</p>
     <div class="block">
-      <p class="block-label">Texto sticker (abertura)</p>
-      <div class="sticker-box">"Seu cortisol não está alto porque você não tomou ashwagandha."</div>
+      <p class="block-label">Sticker de abertura (texto na tela)</p>
+      <div class="sticker-box">"Todo setembro o Instagram enche de laço amarelo. No consultório, o que muda é outra coisa."</div>
     </div>
-
     <div class="block">
       <p class="block-label">Roteiro — palavra por palavra</p>
       <div style="overflow-x:auto;">
         <table class="roteiro-table">
-          <thead>
-            <tr><th>Tempo</th><th>Seção</th><th>Texto</th></tr>
-          </thead>
+          <thead><tr><th>Tempo</th><th>Seção</th><th>Texto</th></tr></thead>
           <tbody>
             <tr>
               <td class="time-cell">0–3s</td>
-              <td><span class="section-label">Gancho</span></td>
-              <td>"Em 2026, 'cortisol alto' virou o diagnóstico mais popular do Instagram. E junto veio um suplemento para vender. Vou te contar o que está errado nessa narrativa."</td>
+              <td><span class="section-label">GANCHO</span>Todo setembro o Instagram enche de laço amarelo. No consultório, o que muda é outra coisa.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">3–20s</td>
-              <td><span class="section-label">Contexto</span></td>
-              <td>"O cortisol é um hormônio real. A resposta de estresse do corpo é real. O que não é real é a ideia de que você pode medir 'cortisol alto' num sintoma vago e tratar com ashwagandha. Não funciona assim. E entender como funciona de verdade importa — porque o que está acontecendo no seu corpo pode ser mais sério do que um suplemento resolve."</td>
+              <td class="time-cell">3–15s</td>
+              <td><span class="section-label">CONTEXTO</span>As mulheres que chegam até mim em setembro não estão em crise. São as que assistiram os posts o mês inteiro e finalmente disseram: isso é sobre mim.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">20–40s</td>
-              <td><span class="section-label">Mecanismo real</span></td>
-              <td>"Quando você está em estado de alerta constante — pressão no trabalho, conflito em casa, preocupação crônica sem descanso — o sistema nervoso autônomo fica ativado por tempo prolongado. Com o tempo, isso afeta o sono, a concentração, o humor, a imunidade. Isso tem nome clínico: não é 'cortisol alto' como problema isolado. É uma resposta de estresse crônica que, sem tratamento, evolui para ansiedade, depressão ou burnout."</td>
+              <td class="time-cell">15–35s</td>
+              <td><span class="section-label">PROCESSO</span>Elas chegam ainda funcionando. Trabalham, cuidam de casa, aparecem nas reuniões. Mas carregam um peso há meses que não passa com descanso, com café, com fim de semana. O Setembro Amarelo não criou esse sofrimento. Ele criou uma janela.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">40–58s</td>
-              <td><span class="section-label">Disrupção + CTA</span></td>
-              <td>"Ashwagandha não trata ansiedade. Dieta anti-inflamatória não trata burnout. Hábitos saudáveis ajudam — mas quando o sistema já entrou em colapso, o que você precisa é de avaliação médica. Não de suplemento. Se você está com insônia, dificuldade de concentração, irritabilidade que não passa: o primeiro passo é uma consulta. Link na bio."</td>
+              <td class="time-cell">35–52s</td>
+              <td><span class="section-label">RESULTADO</span>Eu prefiro atender quem chega assim. Não porque é caso fácil. Mas porque ainda existe espaço antes da crise. E é nesse espaço que o tratamento funciona melhor.</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="time-cell">52–65s</td>
+              <td><span class="section-label">CTA</span>Se esse mês te fez perceber que você não está bem: use essa janela. O agendamento está aberto. Link na bio.</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Textos de tela (arte)</p>
       <div class="tela-tags">
-        <span class="tela-tag">cortisol alto ≠ diagnóstico</span>
-        <span class="tela-tag">resposta de estresse crônica — isso tem nome</span>
-        <span class="tela-tag">suplemento não trata burnout</span>
+        <span class="tela-tag">"Laço amarelo não muda o consultório."</span>
+        <span class="tela-tag">"Ela chegou ainda funcionando."</span>
+        <span class="tela-tag">"Setembro não criou o sofrimento."</span>
+        <span class="tela-tag">"Criou uma janela."</span>
+        <span class="tela-tag">"Ainda existe espaço antes da crise."</span>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
-      <div class="legenda">"Cortisol alto" virou o diagnóstico mais popular do Instagram em 2026. E junto veio uma indústria de suplementos para vender.
+      <div class="legenda">Todo setembro o Instagram enche de laço amarelo.
 
-O cortisol é real. A resposta de estresse crônica é real. O problema é a simplificação: um sintoma vago + um produto = uma "solução" que não funciona.
+No consultório, o que muda é outra coisa.
 
-O que realmente acontece quando você está em burnout não se mede com uma pesquisa no Instagram e não se trata com ashwagandha. É uma desregulação do sistema nervoso autônomo que, sem avaliação e tratamento adequados, evolui para quadros clínicos reais.
+As mulheres que chegam até mim em setembro não estão em crise. São as que assistiram os posts o mês inteiro e finalmente disseram para si mesmas: isso é sobre mim.
 
-Se você tem insônia, dificuldade de concentrar, irritabilidade que não passa: isso tem nome. E tem tratamento.
+Elas chegam ainda funcionando. Trabalham, cuidam de casa, aparecem nas reuniões. Mas carregam um peso há meses que não passa com descanso, com café, com fim de semana.
 
-Link na bio.
+O Setembro Amarelo não criou esse sofrimento. Criou uma janela.
 
-(Dados: Público Portugal, março 2026)
+Eu prefiro atender quem usa essa janela. Não porque é caso fácil. Mas porque ainda existe espaço antes da crise. E é nesse espaço que o tratamento funciona melhor.
+
+Se esse mês te fez perceber que você não está bem: use essa janela. O agendamento está aberto. Link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
     <div class="block">
       <p class="block-label">Setup de gravação</p>
-      <div class="obs-box">Câmera fixa, fundo neutro ou consultório. Tom direto e seguro — não condescendente. Stickers de texto com os termos técnicos ao aparecer no roteiro. Duração máxima: 75s.</div>
+      <div class="obs-box">Consultório ou fundo neutro. Tom de voz calmo, olhar direto para câmera. Sem legenda animada nos primeiros 3s — deixar o sticker de texto fazer o trabalho. Edição limpa, sem cortes rápidos. Daniele falando diretamente, sem recursos de edição excessivos.</div>
     </div>
   </div>
 </section>
 
-<!-- POST 5 -->
+<!-- POST 5 — CA2 NR-1 -->
 <section class="post-section bookmark-carrossel" id="c5">
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-neutral">Carrossel</span>
-          <span class="pill pill-neutral">Desmistificação</span>
-        </div>
-        <p class="post-date">17 de setembro de 2026 · quarta-feira</p>
+        <div class="post-pills"><span class="pill pill-neutral">Carrossel · CA2</span><span class="pill pill-neutral">Desmistificação</span></div>
+        <p class="post-date">17 de setembro de 2026 · quarta-feira · 8 slides</p>
       </div>
       <p class="post-num">Post 5 de 8</p>
     </div>
     <h2 class="post-title">NR-1 — sua empresa é obrigada por lei</h2>
     <p class="post-subtitle">Desde maio de 2026, a NR-1 obriga empresas a gerenciar riscos psicossociais. A maioria das mulheres não sabe.</p>
-
     <div class="block">
-      <p class="block-label">Slides — copy para o designer</p>
+      <p class="block-label">Arte dos slides</p>
+      <div class="slides-gallery">
+        <img src="./Carrossel P5 - NR1/images/slide-01.png" alt="Slide 1">
+        <img src="./Carrossel P5 - NR1/images/slide-02.png" alt="Slide 2">
+        <img src="./Carrossel P5 - NR1/images/slide-03.png" alt="Slide 3">
+        <img src="./Carrossel P5 - NR1/images/slide-04.png" alt="Slide 4">
+        <img src="./Carrossel P5 - NR1/images/slide-05.png" alt="Slide 5">
+        <img src="./Carrossel P5 - NR1/images/slide-06.png" alt="Slide 6">
+        <img src="./Carrossel P5 - NR1/images/slide-07.png" alt="Slide 7">
+        <img src="./Carrossel P5 - NR1/images/slide-08.png" alt="Slide 8">
+      </div>
+    </div>
+    <div class="block">
+      <p class="block-label">Copy — slide a slide</p>
       <div style="overflow-x:auto;">
         <table class="slides-table">
-          <thead>
-            <tr><th>#</th><th>Nome</th><th>Conteúdo</th></tr>
-          </thead>
+          <thead><tr><th>#</th><th>Nome</th><th>Conteúdo</th></tr></thead>
           <tbody>
-            <tr class="slide-capa">
-              <td><span class="slide-n">01</span></td>
-              <td><span class="slide-name">Capa / Gancho</span></td>
-              <td>"Desde maio de 2026,<br>sua empresa é obrigada por lei<br>a cuidar da sua saúde mental.<br>Você sabia disso?"</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">02</span></td>
-              <td><span class="slide-name">O que é</span></td>
-              <td>"Isso se chama NR-1.<br>Norma Regulamentadora do Ministério do Trabalho.<br>Em vigor desde 26 de maio de 2026."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">03</span></td>
-              <td><span class="slide-name">Obrigações</span></td>
-              <td>"O que ela obriga sua empresa a fazer:<br>identificar e gerenciar os riscos psicossociais<br>do ambiente de trabalho."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">04</span></td>
-              <td><span class="slide-name">O que são riscos</span></td>
-              <td>"Riscos psicossociais incluem:<br>pressão excessiva · metas inatingíveis<br>jornadas que adoecem · falta de autonomia<br>assédio moral · conflitos sem resolução"</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">05</span></td>
-              <td><span class="slide-name">Dado — 63%</span></td>
-              <td>"63% dos afastamentos por transtornos mentais em 2025 foram de mulheres.<br>A maioria trabalhava em empresa que não gerenciava nenhum desses riscos.<br>Porque legalmente não precisava. Agora precisa."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">06</span></td>
-              <td><span class="slide-name">O que muda</span></td>
-              <td>"Isso não resolve tudo.<br>Mas muda o que você pode exigir —<br>e o que a empresa é obrigada a oferecer."</td>
-            </tr>
-            <tr>
-              <td><span class="slide-n">07</span></td>
-              <td><span class="slide-name">Virada</span></td>
-              <td>"Se você está adoecendo no trabalho<br>e achava que era problema só seu:<br>agora tem nome, tem lei, e tem tratamento."</td>
-            </tr>
-            <tr class="slide-cta">
-              <td><span class="slide-n">08</span></td>
-              <td><span class="slide-name">CTA / Assinatura</span></td>
-              <td>Daniele Cardeal · A psiquiatra que acompanha.<br>Para avaliação psiquiátrica: link na bio.</td>
-            </tr>
+            <tr class="slide-capa"><td><span class="slide-n">01</span></td><td><span class="slide-name">Capa / Gancho</span></td><td>"Desde maio de 2026,<br>sua empresa é obrigada por lei<br>a cuidar da sua saúde mental.<br>Você sabia disso?"</td></tr>
+            <tr><td><span class="slide-n">02</span></td><td><span class="slide-name">O que é</span></td><td>"Isso se chama NR-1.<br>Norma Regulamentadora do Ministério do Trabalho.<br>Em vigor desde 26 de maio de 2026."</td></tr>
+            <tr><td><span class="slide-n">03</span></td><td><span class="slide-name">Obrigações</span></td><td>"O que ela obriga sua empresa a fazer:<br>identificar e gerenciar os riscos psicossociais<br>do ambiente de trabalho."</td></tr>
+            <tr><td><span class="slide-n">04</span></td><td><span class="slide-name">O que são riscos</span></td><td>"Riscos psicossociais incluem:<br>pressão excessiva · metas inatingíveis<br>jornadas que adoecem · falta de autonomia<br>assédio moral · conflitos sem resolução"</td></tr>
+            <tr><td><span class="slide-n">05</span></td><td><span class="slide-name">Dado — 63%</span></td><td>"63% dos afastamentos por transtornos mentais em 2025 foram de mulheres.<br>A maioria trabalhava em empresa que não gerenciava nenhum desses riscos.<br>Porque legalmente não precisava. Agora precisa."</td></tr>
+            <tr><td><span class="slide-n">06</span></td><td><span class="slide-name">O que muda</span></td><td>"Isso não resolve tudo.<br>Mas muda o que você pode exigir —<br>e o que a empresa é obrigada a oferecer."</td></tr>
+            <tr><td><span class="slide-n">07</span></td><td><span class="slide-name">Virada</span></td><td>"Se você está adoecendo no trabalho<br>e achava que era problema só seu:<br>agora tem nome, tem lei, e tem tratamento."</td></tr>
+            <tr class="slide-cta"><td><span class="slide-n">08</span></td><td><span class="slide-name">CTA</span></td><td>Daniele Cardeal · A psiquiatra que acompanha.<br>Para avaliação psiquiátrica: link na bio.</td></tr>
           </tbody>
         </table>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
       <div class="legenda">Em maio de 2026, entrou em vigor a NR-1 atualizada — norma do Ministério do Trabalho que obriga empresas a identificar e gerenciar os riscos psicossociais do trabalho.
@@ -840,11 +481,6 @@ Para avaliação: link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Slide 1: fundo #1C2B3A (escuro), urgência visual. Slides 2–4 e 6: alternância branco / #EEF4FA, Source Serif 4. Slide 5: fundo #689BCB, texto branco — dado dos 63%. Slide 7: fundo #F095AA, texto branco. Slide 8: gradiente azul→rosa, assinatura.</div>
-    </div>
   </div>
 </section>
 
@@ -853,26 +489,17 @@ Para avaliação: link na bio.
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-primary">Card</span>
-          <span class="pill pill-neutral">Reconhecimento</span>
-        </div>
+        <div class="post-pills"><span class="pill pill-primary">Card</span><span class="pill pill-neutral">Reconhecimento</span></div>
         <p class="post-date">22 de setembro de 2026 · segunda-feira</p>
       </div>
       <p class="post-num">Post 6 de 8</p>
     </div>
     <h2 class="post-title">90% das mães brasileiras têm burnout</h2>
     <p class="post-subtitle">O que falta não é força.</p>
-
     <div class="block">
-      <p class="block-label">Texto no card</p>
-      <div class="card-text">
-        <p class="card-hero">MÃE.</p>
-        <p class="card-tag">isso não é drama.</p>
-        <div class="card-body">90% das mães brasileiras têm burnout.<br>O que falta não é força.</div>
-      </div>
+      <p class="block-label">Arte do card</p>
+      <img class="post-img" src="./Card P6 - MAE/images/card-01.png" alt="Card P6">
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
       <div class="legenda">90% das mães brasileiras têm sintomas de burnout. 4 em cada 10 criam os filhos sem rede de apoio.
@@ -889,100 +516,93 @@ Se você está nesse ciclo: link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Hero word MÃE em Gilda Display. Fundo: foto editorial com luz quente mas não açucarada — nada de bebê ou família perfeita. Pode ser foto da própria Daniele em consultório ou ambiente neutro, tom de acolhimento. Ou foto editorial feminina adulta, cansada mas sem drama.</div>
-    </div>
   </div>
 </section>
 
-<!-- POST 7 -->
+<!-- POST 7 — REEL BASTIDORES WHATSAPP -->
 <section class="post-section bookmark-reel" id="c7">
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-accent">Reel</span>
-          <span class="pill pill-neutral">Bastidores</span>
-        </div>
-        <p class="post-date">24 de setembro de 2026 · quarta-feira · 60s</p>
+        <div class="post-pills"><span class="pill pill-accent">Reel</span><span class="pill pill-neutral">Bastidores</span><span class="pill pill-neutral">60s</span></div>
+        <p class="post-date">24 de setembro de 2026 · quarta-feira · 55–65s</p>
       </div>
       <p class="post-num">Post 7 de 8</p>
     </div>
-    <h2 class="post-title">O que acontece entre as consultas</h2>
-    <p class="post-subtitle">O suporte via WhatsApp como diferencial real de acompanhamento psiquiátrico.</p>
-
+    <h2 class="post-title">A mensagem das 22h</h2>
+    <p class="post-subtitle">Avatar: a mulher frustrada com o convênio — quer uma psiquiatra que não desaparece depois da consulta.</p>
     <div class="block">
-      <p class="block-label">Texto sticker (abertura)</p>
-      <div class="sticker-box">"O que acontece quando você sai da consulta e a próxima está marcada para daqui a 30 dias?"</div>
+      <p class="block-label">Sticker de abertura (texto na tela)</p>
+      <div class="sticker-box">"Ontem à noite, às 22h, recebi uma mensagem de paciente."</div>
     </div>
-
     <div class="block">
       <p class="block-label">Roteiro — palavra por palavra</p>
       <div style="overflow-x:auto;">
         <table class="roteiro-table">
-          <thead>
-            <tr><th>Tempo</th><th>Seção</th><th>Texto</th></tr>
-          </thead>
+          <thead><tr><th>Tempo</th><th>Seção</th><th>Texto</th></tr></thead>
           <tbody>
             <tr>
               <td class="time-cell">0–3s</td>
-              <td><span class="section-label">Gancho</span></td>
-              <td>"O que acontece quando você sai da consulta psiquiátrica e a próxima está marcada para daqui a 30 dias?"</td>
+              <td><span class="section-label">GANCHO</span>Ontem à noite, às 22h, recebi uma mensagem de paciente.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">3–18s</td>
-              <td><span class="section-label">Problema</span></td>
-              <td>"Na maioria dos modelos de psiquiatria, a resposta é: nada. Você vai com o medicamento novo, com as dúvidas, com os efeitos que apareceram no meio da semana — e espera o próximo retorno. Isso tem um custo. Medicamento que gera efeito colateral às 22h vai ser tolerado ou abandonado, porque não há a quem perguntar."</td>
+              <td class="time-cell">3–15s</td>
+              <td><span class="section-label">CONTEXTO</span>Não era emergência. Era uma dúvida: o medicamento estava causando um efeito colateral que ela não sabia se era normal. E ela não tinha com quem confirmar até o próximo retorno.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">18–40s</td>
-              <td><span class="section-label">Diferencial</span></td>
-              <td>"No meu acompanhamento, funciona diferente. Você tem acesso via WhatsApp para o que surgir entre as consultas. Não é suporte 24h irrestrito. É acesso direto à psiquiatra quando o medicamento está gerando dúvida, quando algo surgiu que não esperava, quando você precisa saber se o que está sentindo é efeito da medicação ou piora do quadro. Coisas que não podem esperar 30 dias."</td>
+              <td class="time-cell">15–35s</td>
+              <td><span class="section-label">PROCESSO</span>Eu respondi. Em 10 minutos ela tinha a informação que precisava para dormir tranquila. Isso não cabe em 15 minutos de convênio. Não é crítica ao médico. É o que o modelo não permite.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">40–55s</td>
-              <td><span class="section-label">Impacto</span></td>
-              <td>"A diferença no resultado do tratamento quando existe esse suporte é real. Paciente que tem dúvida respondida não abandona o tratamento. Paciente que fica sozinha com o medicamento novo, às vezes abandona. E recomeçar do zero custa mais tempo e mais sofrimento."</td>
+              <td class="time-cell">35–52s</td>
+              <td><span class="section-label">RESULTADO</span>Quando falo em acompanhamento real, é isso. Não é presença constante. É estar disponível no momento que importa. Entre uma consulta e outra existe uma vida. E às vezes ela precisa de uma resposta antes do próximo mês.</td>
+              <td></td>
             </tr>
             <tr>
-              <td class="time-cell">55–60s</td>
-              <td><span class="section-label">CTA</span></td>
-              <td>"Se você quer entender como funciona esse modelo: link na bio."</td>
+              <td class="time-cell">52–62s</td>
+              <td><span class="section-label">CTA</span>Para entender como funciona meu modelo de acompanhamento: link na bio.</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Textos de tela (arte)</p>
       <div class="tela-tags">
-        <span class="tela-tag">medicamento novo às 22h</span>
-        <span class="tela-tag">acesso direto entre consultas</span>
-        <span class="tela-tag">tratamento que não para no meio</span>
+        <span class="tela-tag">"22h. Uma mensagem."</span>
+        <span class="tela-tag">"Não era emergência."</span>
+        <span class="tela-tag">"10 minutos. Ela dormiu tranquila."</span>
+        <span class="tela-tag">"Entre consultas existe uma vida."</span>
+        <span class="tela-tag">"Isso é acompanhamento real."</span>
       </div>
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
-      <div class="legenda">O que acontece entre uma consulta e a próxima é parte do tratamento. Mas a maioria dos modelos de psiquiatria não cobre isso.
+      <div class="legenda">Ontem à noite, às 22h, recebi uma mensagem de paciente.
 
-Efeito colateral novo, dúvida sobre a dose, situação que surgiu e que você não sabe se é sintoma ou adaptação: na psiquiatria de convênio, você espera o próximo retorno. Às vezes um mês. Às vezes mais.
+Não era emergência. Era uma dúvida sobre o medicamento: um efeito colateral que ela não sabia se era normal ou se precisava parar de tomar.
 
-No meu acompanhamento, você tem acesso via WhatsApp para o que surgir entre as consultas. Não é suporte irrestrito 24h. É a diferença entre ter uma psiquiatra que acompanha e ter uma especialista que você visita quando fica muito mal.
+Ela não tinha com quem confirmar. O próximo retorno era daqui a três semanas.
 
-Tratamento que não tem suporte entre as sessões tem mais abandono. E recomeçar do zero custa mais tempo do que o suporte custaria.
+Eu respondi. Em 10 minutos, ela sabia o que estava acontecendo e o que fazer. Dormiu tranquila.
 
-Para entender como funciona: link na bio.
+Isso não cabe no modelo de convênio. Não é crítica ao médico. É o que o sistema não permite.
+
+No meu acompanhamento, permite.
+
+Porque entre uma consulta e outra existe uma vida. E às vezes ela precisa de uma resposta antes do próximo mês.
+
+Para entender como funciona meu modelo: link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
     <div class="block">
       <p class="block-label">Setup de gravação</p>
-      <div class="obs-box">Câmera fixa, consultório. Tom conversacional mas direto — não é pitch de vendas, é explicação de diferencial. Sem sticker com foto de celular ou encenação. Fala natural. Duração máxima: 60s.</div>
+      <div class="obs-box">Pode ser gravado de forma mais casual — como se estivesse contando para uma amiga. Não precisa de consultório ao fundo. Câmera frontal, luz natural. Tom de voz normal, sem dramatizar. A história já tem peso sozinha.</div>
     </div>
   </div>
 </section>
@@ -992,26 +612,17 @@ Para entender como funciona: link na bio.
   <div class="container">
     <div class="post-header">
       <div class="post-meta">
-        <div class="post-pills">
-          <span class="pill pill-primary">Card</span>
-          <span class="pill pill-neutral">Alta e Resultado</span>
-        </div>
+        <div class="post-pills"><span class="pill pill-primary">Card</span><span class="pill pill-neutral">Alta e Resultado</span></div>
         <p class="post-date">29 de setembro de 2026 · segunda-feira</p>
       </div>
       <p class="post-num">Post 8 de 8</p>
     </div>
     <h2 class="post-title">Além do setembro amarelo</h2>
     <p class="post-subtitle">O mês de campanha passa. O cuidado que você decidir ter não depende de calendário.</p>
-
     <div class="block">
-      <p class="block-label">Texto no card</p>
-      <div class="card-text">
-        <p class="card-hero">ALÉM.</p>
-        <p class="card-tag">do setembro amarelo.</p>
-        <div class="card-body">O mês de campanha passa.<br>O cuidado que você decidir ter<br>não depende de calendário.</div>
-      </div>
+      <p class="block-label">Arte do card</p>
+      <img class="post-img" src="./Card P8 - ALEM/images/card-01.png" alt="Card P8">
     </div>
-
     <div class="block">
       <p class="block-label">Legenda Instagram</p>
       <div class="legenda">Setembro Amarelo acaba hoje.
@@ -1028,15 +639,9 @@ Link na bio.
 
 <strong>Daniele Cardeal · A psiquiatra que acompanha.</strong></div>
     </div>
-
-    <div class="block">
-      <p class="block-label">Obs. para o designer</p>
-      <div class="obs-box">Hero word ALÉM em Gilda Display — pode ser em rose (#F095AA) para contraste suave com o fundo claro. Fundo: branco ou #EEF4FA. Foto editorial: lifestyle feminino adulto, luz natural, ambiente de clareza. Fecha o mês com leveza — esperançoso e concreto.</div>
-    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="container" style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px;">
     <span class="footer-brand">arrive in digital</span>
