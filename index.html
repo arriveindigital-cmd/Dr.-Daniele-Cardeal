@@ -321,10 +321,10 @@
   <div class="month-tabs">
     <button class="mtab" id="tab-junho" onclick="switchMonth('junho')">Mês 1</button>
     <button class="mtab" id="tab-julho" onclick="switchMonth('julho')">Mês 2</button>
-    <button class="mtab active" id="tab-agosto" onclick="switchMonth('agosto')">Mês 3</button>
-    <button class="mtab" id="tab-setembro" onclick="switchMonth('setembro')">Mês 4</button>
+    <button class="mtab" id="tab-agosto" onclick="switchMonth('agosto')">Mês 3</button>
+    <button class="mtab active" id="tab-setembro" onclick="switchMonth('setembro')">Mês 4</button>
   </div>
-  <span class="nav-tag" id="nav-tag">Mês 1 · Instagram</span>
+  <span class="nav-tag" id="nav-tag">Mês 4 · Setembro 2026</span>
 </nav>
 
 
@@ -2360,6 +2360,24 @@ Daniele Cardeal · A psiquiatra que acompanha.</div>
   /* ── Reveal ── */
   const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }), { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ── Mês atual por data, sempre que a página abre ── */
+  (function () {
+    var months = [
+      { key: 'junho', y: 2026, m: 6 },
+      { key: 'julho', y: 2026, m: 7 },
+      { key: 'agosto', y: 2026, m: 8 },
+      { key: 'setembro', y: 2026, m: 9 }
+    ];
+    var now = new Date();
+    var cur = now.getFullYear() * 12 + now.getMonth();
+    var best = months[0];
+    for (var i = 0; i < months.length; i++) {
+      var val = months[i].y * 12 + (months[i].m - 1);
+      if (val <= cur) best = months[i];
+    }
+    window.addEventListener('DOMContentLoaded', function () { switchMonth(best.key); });
+  })();
 
   /* ── Month switch ── */
   function switchMonth(m) {
