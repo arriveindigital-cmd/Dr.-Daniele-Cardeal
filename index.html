@@ -2926,5 +2926,356 @@ Daniele Cardeal &middot; A psiquiatra que acompanha.</div>
   }
 </script>
 
+<!-- ════════════════════════════════════════════════════════════════════════
+     DOWNLOAD DE POSTS — componente padrão do entregável (Arrive In Digital)
+     Fonte canônica: institucional/componentes-entregavel/download-posts.html
+
+     Auto-instalável: colar este bloco inteiro imediatamente antes de </body>.
+     Não precisa editar nenhum post — o script lê as imagens do próprio
+     onclick="lb([...])" de cada .pcard e injeta:
+       · checkbox de seleção na miniatura
+       · botão "Baixar" em cada post
+       · barra fixa no rodapé, que aparece conforme a página rola
+       · botão de download da imagem aberta no lightbox (se houver #lbox)
+
+     Vários arquivos saem em .zip (JSZip via CDN); arquivo único baixa direto.
+     Abrindo o HTML em file:// o navegador bloqueia o fetch e o zip não monta —
+     nesse caso cai no download sequencial. No site publicado funciona normal.
+     ════════════════════════════════════════════════════════════════════════ -->
+
+<style>
+  :root { --dl-accent: var(--red, var(--blue, #689BCB)); }
+
+  /* ── tokens claros (default) / escuros (.dl-dark no html) ── */
+  .dl-surface { --dl-bg: rgba(255,255,255,0.94); --dl-fg: #3a4350; --dl-dim: #8a97a8; --dl-line: rgba(0,0,0,0.10); }
+  .dl-dark .dl-surface { --dl-bg: rgba(18,19,31,0.94); --dl-fg: #F0EFEF; --dl-dim: rgba(240,239,239,0.55); --dl-line: rgba(255,255,255,0.12); }
+
+  /* ── checkbox na miniatura ── */
+  .dl-pick {
+    position: absolute; top: 10px; left: 10px; z-index: 4;
+    display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 7px;
+    background: rgba(255,255,255,0.92); border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18); cursor: pointer;
+    transition: background .15s, transform .15s;
+  }
+  .dl-pick:hover { transform: scale(1.06); }
+  .dl-pick input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .dl-pick span { width: 12px; height: 12px; border-radius: 3px; background: transparent; border: 1.5px solid rgba(0,0,0,0.35); transition: all .15s; }
+  .dl-pick input:checked ~ span { background: var(--dl-accent); border-color: var(--dl-accent); }
+  .dl-pick input:focus-visible ~ span { outline: 2px solid var(--dl-accent); outline-offset: 3px; }
+  .pcard.dl-on .dl-pick { background: var(--dl-accent); border-color: var(--dl-accent); }
+  .pcard.dl-on .dl-pick span { background: #fff; border-color: #fff; }
+
+  /* ── botão por post ── */
+  .dl-one {
+    display: inline-flex; align-items: center; gap: 7px;
+    margin: 0 20px 14px; padding: 8px 14px;
+    background: none; border: 1px solid var(--dl-line); border-radius: 999px;
+    color: var(--dl-fg); font: 600 11px/1 inherit; letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: border-color .15s, color .15s, background .15s;
+  }
+  .dl-one:hover { border-color: var(--dl-accent); color: var(--dl-accent); }
+  .dl-one[disabled] { opacity: .55; cursor: default; }
+  .dl-one b { font-weight: 500; opacity: .6; text-transform: none; letter-spacing: 0; }
+
+  /* ── barra do rodapé ── */
+  .dl-bar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 90;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    padding: 12px 24px; background: var(--dl-bg); color: var(--dl-fg);
+    border-top: 1px solid var(--dl-line);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 -6px 28px rgba(0,0,0,0.10);
+    transform: translateY(110%); opacity: 0; pointer-events: none;
+    transition: transform .28s ease, opacity .28s ease;
+  }
+  .dl-bar.on { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .dl-bar-txt { flex: 1 1 200px; font: 400 12px/1.5 inherit; }
+  .dl-bar-txt strong { font-weight: 600; }
+  .dl-bar-txt em { font-style: normal; color: var(--dl-dim); }
+  .dl-btn {
+    padding: 10px 18px; border-radius: 999px; border: 1px solid var(--dl-line);
+    background: none; color: var(--dl-fg);
+    font: 600 11px/1 inherit; letter-spacing: 0.08em; text-transform: uppercase;
+    cursor: pointer; white-space: nowrap; transition: all .15s;
+  }
+  .dl-btn:hover { border-color: var(--dl-accent); color: var(--dl-accent); }
+  .dl-btn-main { background: var(--dl-accent); border-color: var(--dl-accent); color: #fff; }
+  .dl-btn-main:hover { filter: brightness(1.08); color: #fff; }
+  .dl-btn[disabled] { opacity: .45; cursor: default; filter: none; }
+  .dl-btn-ghost { border: none; color: var(--dl-dim); letter-spacing: 0.04em; }
+
+  @media (max-width: 720px) {
+    .dl-bar { gap: 10px; padding: 10px 16px; }
+    .dl-bar-txt { flex-basis: 100%; }
+    .dl-btn { flex: 1 1 auto; padding: 11px 12px; font-size: 10px; letter-spacing: 0.05em; }
+  }
+  @media print { .dl-bar, .dl-pick, .dl-one { display: none !important; } }
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  var ZIP_CDN = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+  var picked = new Set();     /* .pcard selecionados */
+  var cards  = [];            /* { el, imgs, name } */
+  var busy   = false;
+  var bar, txt, btnSel, btnAll, btnClear;
+
+  /* ── utilidades ───────────────────────────────────────────────────── */
+
+  function slug(s) {
+    return (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/["'·—–]/g, '').replace(/[^a-zA-Z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '').slice(0, 60).toLowerCase() || 'post';
+  }
+
+  function ext(path) {
+    var m = decodeURIComponent(path).match(/\.([a-z0-9]{3,4})(?:\?|$)/i);
+    return m ? m[1].toLowerCase() : 'png';
+  }
+
+  /* lê as imagens de onclick="lb([...])" */
+  function imgsFrom(el) {
+    var code = (el && el.getAttribute('onclick')) || '';
+    var m = code.match(/lb\(\s*(\[[\s\S]*?\])\s*\)/);
+    if (!m) return [];
+    try { return JSON.parse(m[1].replace(/'/g, '"')); } catch (e) { return []; }
+  }
+
+  function visible(card) {
+    return !card.classList.contains('hidden') && card.offsetParent !== null;
+  }
+
+  function label(card) {
+    var t = card.querySelector('.ptitle'), n = card.querySelector('.pnum');
+    var num = ((n && n.textContent.match(/Post\s*(\d+)/i)) || [])[1];
+    return (num ? String(num).padStart(2, '0') + '-' : '') + slug(t && t.textContent);
+  }
+
+  function save(blob, name) {
+    var url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+
+  function loadZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    return new Promise(function (res, rej) {
+      var s = document.createElement('script');
+      s.src = ZIP_CDN;
+      s.onload = function () { res(window.JSZip); };
+      s.onerror = rej;
+      document.head.appendChild(s);
+    });
+  }
+
+  /* ── download ─────────────────────────────────────────────────────── */
+
+  /* um arquivo só: baixa direto, sem zip */
+  function one(path, name) {
+    var a = document.createElement('a');
+    a.href = path; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  /* fallback quando o zip não é possível (file://, CDN fora do ar) */
+  function sequential(files) {
+    files.forEach(function (f, i) { setTimeout(function () { one(f.path, f.name); }, i * 700); });
+  }
+
+  function run(files, zipFile, btn) {
+    if (!files.length || busy) return;
+    if (files.length === 1) { one(files[0].path, files[0].name); return; }
+
+    busy = true;
+    var original = btn ? btn.innerHTML : '';
+    var tick = function (i) { if (btn) btn.textContent = 'Preparando ' + i + '/' + files.length; };
+    if (btn) btn.disabled = true;
+    tick(0);
+
+    loadZip().then(function (JSZip) {
+      var zip = new JSZip(), n = 0;
+      return files.reduce(function (chain, f) {
+        return chain.then(function () {
+          return fetch(f.path).then(function (r) {
+            if (!r.ok) throw new Error(r.status);
+            return r.blob();
+          }).then(function (b) { zip.file(f.name, b); tick(++n); });
+        });
+      }, Promise.resolve()).then(function () {
+        if (btn) btn.textContent = 'Compactando…';
+        return zip.generateAsync({ type: 'blob' });
+      }).then(function (blob) { save(blob, zipFile); });
+    }).catch(function () {
+      sequential(files);
+    }).then(function () {
+      busy = false;
+      if (btn) { btn.disabled = false; btn.innerHTML = original; }
+      sync();
+    });
+  }
+
+  function filesOf(card, flat) {
+    var rec = cards.filter(function (c) { return c.el === card; })[0];
+    if (!rec) return [];
+    var base = rec.name, many = rec.imgs.length > 1;
+    return rec.imgs.map(function (p, i) {
+      var file = base + (many ? '-' + String(i + 1).padStart(2, '0') : '') + '.' + ext(p);
+      return { path: p, name: flat ? file : (many ? base + '/' + file : file) };
+    });
+  }
+
+  function zipName(suffix) {
+    var t = (document.title || 'entregavel').split(/[|·—–]/)[0];
+    return slug(t) + '-' + suffix + '.zip';
+  }
+
+  /* ── barra ────────────────────────────────────────────────────────── */
+
+  /* só o que está visível: respeita a troca de mês e o filtro de formato */
+  function monthCards() {
+    return cards.filter(function (c) { return visible(c.el); });
+  }
+
+  function sync() {
+    var sel = cards.filter(function (c) { return picked.has(c.el) && visible(c.el); });
+    var pool = monthCards();
+    var qtd = sel.reduce(function (s, c) { return s + c.imgs.length; }, 0);
+
+    txt.innerHTML = sel.length
+      ? '<strong>' + sel.length + ' post' + (sel.length > 1 ? 's' : '') + ' selecionado' + (sel.length > 1 ? 's' : '') + '</strong> <em>· ' + qtd + ' arquivo' + (qtd > 1 ? 's' : '') + '</em>'
+      : '<em>Marque os posts que quiser baixar — ou baixe tudo de uma vez.</em>';
+
+    btnSel.disabled = busy || !sel.length;
+    btnAll.disabled = busy || !pool.length;
+    if (!busy) btnAll.textContent = 'Baixar tudo (' + pool.length + ')';
+    btnClear.style.display = sel.length ? '' : 'none';
+  }
+
+  function buildBar() {
+    bar = document.createElement('div');
+    bar.className = 'dl-bar dl-surface';
+    bar.innerHTML =
+      '<div class="dl-bar-txt"></div>' +
+      '<button class="dl-btn dl-btn-ghost" type="button">Limpar</button>' +
+      '<button class="dl-btn" type="button">Baixar tudo</button>' +
+      '<button class="dl-btn dl-btn-main" type="button">Baixar selecionados</button>';
+    document.body.appendChild(bar);
+
+    var btns = bar.querySelectorAll('button');
+    txt = bar.querySelector('.dl-bar-txt');
+    btnClear = btns[0]; btnAll = btns[1]; btnSel = btns[2];
+
+    btnClear.addEventListener('click', function () {
+      picked.forEach(function (c) {
+        c.classList.remove('dl-on');
+        var i = c.querySelector('.dl-pick input');
+        if (i) i.checked = false;
+      });
+      picked.clear();
+      sync();
+    });
+
+    btnAll.addEventListener('click', function () {
+      var files = [];
+      monthCards().forEach(function (c) { files = files.concat(filesOf(c.el, false)); });
+      run(files, zipName('todos-os-posts'), btnAll);
+    });
+
+    btnSel.addEventListener('click', function () {
+      var files = [];
+      cards.forEach(function (c) {
+        if (picked.has(c.el) && visible(c.el)) files = files.concat(filesOf(c.el, false));
+      });
+      run(files, zipName('posts-selecionados'), btnSel);
+    });
+  }
+
+  /* aparece conforme a página rola, some de volta no topo */
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    bar.classList.toggle('on', y > 420 && monthCards().length > 0);
+  }
+
+  /* ── instalação ───────────────────────────────────────────────────── */
+
+  function wire(card) {
+    var thumb = card.querySelector('[onclick*="lb("]');
+    var imgs = imgsFrom(thumb);
+    if (!imgs.length) return;              /* reel sem arte: nada a baixar */
+
+    cards.push({ el: card, imgs: imgs, name: label(card) });
+
+    /* checkbox na miniatura */
+    if (getComputedStyle(thumb).position === 'static') thumb.style.position = 'relative';
+    var pick = document.createElement('label');
+    pick.className = 'dl-pick';
+    pick.title = 'Selecionar este post';
+    pick.innerHTML = '<input type="checkbox" aria-label="Selecionar este post"><span></span>';
+    var box = pick.querySelector('input');
+    pick.addEventListener('click', function (e) { e.stopPropagation(); });
+    box.addEventListener('change', function () {
+      if (box.checked) { picked.add(card); card.classList.add('dl-on'); }
+      else { picked.delete(card); card.classList.remove('dl-on'); }
+      sync();
+    });
+    thumb.appendChild(pick);
+
+    /* botão do post */
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dl-one';
+    btn.innerHTML = '⤓ Baixar ' + (imgs.length > 1 ? '<b>' + imgs.length + ' artes</b>' : '<b>arte</b>');
+    btn.addEventListener('click', function () {
+      run(filesOf(card, true), label(card) + '.zip', btn);
+    });
+    var anchor = card.querySelector('.expand-btn');
+    if (anchor) anchor.parentNode.insertBefore(btn, anchor); else card.appendChild(btn);
+  }
+
+  /* botão de download no lightbox, se a página tiver um */
+  function wireLightbox() {
+    var nav = document.querySelector('#lbox .lb-nav') || document.querySelector('#lbox .lb-inner');
+    var img = document.getElementById('lbimg');
+    if (!nav || !img) return;
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = '⤓ Baixar esta imagem';
+    b.addEventListener('click', function () {
+      var p = img.getAttribute('src');
+      if (!p) return;
+      one(p, slug(decodeURIComponent(p).split('/').pop().replace(/\.[a-z0-9]+$/i, '')) + '.' + ext(p));
+    });
+    nav.appendChild(b);
+  }
+
+  function init() {
+    /* tema: decide pelo fundo real da página */
+    var bg = getComputedStyle(document.body).backgroundColor.match(/\d+/g) || [255, 255, 255];
+    var lum = (0.2126 * +bg[0] + 0.7152 * +bg[1] + 0.0722 * +bg[2]) / 255;
+    if (lum < 0.5) document.documentElement.classList.add('dl-dark');
+
+    Array.prototype.forEach.call(document.querySelectorAll('.pcard'), wire);
+    if (!cards.length) return;
+
+    buildBar();
+    wireLightbox();
+    sync();
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', sync);
+    /* troca de mês e filtro de formato mudam o que está visível */
+    document.addEventListener('click', function () {
+      setTimeout(function () { sync(); onScroll(); }, 60);
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
 </body>
 </html>
