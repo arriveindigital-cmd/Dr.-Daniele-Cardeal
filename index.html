@@ -2962,6 +2962,8 @@ Se dormir virou uma dificuldade frequente e isso está afetando seu dia, agende 
     document.querySelectorAll('.nav-links a').forEach(function (a) { var base = a.getAttribute('href').slice(1).replace(/-(junho|julho|agosto|setembro|outubro|novembro)$/, ''); a.setAttribute('href', '#' + base + (m === 'junho' ? '' : '-' + m)); });
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.querySelectorAll('#mes-' + m + ' .reveal:not(.visible)').forEach(el => obs.observe(el));
+    // Refresh existing download controls after a programmatic month change.
+    window.dispatchEvent(new Event('resize'));
   }
 
   /* ── Filter ── */
