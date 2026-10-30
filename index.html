@@ -308,11 +308,13 @@
   </style>
 
 <style id="posted-checklist-style">
-.posted-control{display:flex;align-items:center;gap:10px;min-height:44px;margin:0 20px 14px;padding:9px 12px;border:1px solid var(--border);border-radius:9px;cursor:pointer;font:500 12px/1.4 var(--font-ui);color:var(--text-dark);background:var(--white)}
-.posted-control input{width:19px;height:19px;accent-color:var(--blue-dark);flex-shrink:0;cursor:pointer}.posted-control:focus-within{outline:2px solid var(--blue);outline-offset:3px}
-.pcard.is-posted{border-color:var(--blue)}.pcard.is-posted .posted-control{background:var(--bg);border-color:var(--blue);color:var(--blue-dark)}
-.posted-summary{display:flex;flex-wrap:wrap;align-items:center;gap:10px 18px;margin:0 0 20px;font:400 12px/1.6 var(--font-ui);color:var(--text)}.posted-summary strong{color:var(--blue-dark)}.posted-summary small{font-size:11px;color:var(--text-dim)}.posted-storage-error{color:#9d354a!important}
-@media print{.posted-control,.posted-summary{display:none!important}}
+.posting-checklist{padding:56px 0;background:var(--white);border-top:1px solid var(--border)}.posting-checklist .section-head{margin-bottom:20px}.posting-checklist .section-head h2{font-size:36px}.posting-checklist .section-head p{font-size:15px}.posted-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.posted-control{display:grid;grid-template-columns:20px minmax(0,1fr) auto;align-items:center;gap:13px;min-height:86px;padding:16px;border:1px solid var(--border);border-radius:12px;cursor:pointer;color:var(--text-dark);background:var(--white);transition:background .18s,border-color .18s}
+.posted-control input{width:20px;height:20px;accent-color:var(--blue-dark);cursor:pointer}.posted-control:focus-within{outline:2px solid var(--blue);outline-offset:3px}.posted-copy{font:500 13px/1.5 var(--font-ui)}.posted-format{display:block;margin-bottom:4px;font:600 10px/1.4 var(--font-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}.posted-state{font:500 11px/1.4 var(--font-ui);color:var(--text-dim)}
+.posted-control.is-posted{border-color:var(--blue);background:var(--bg)}.posted-control.is-posted .posted-state{color:var(--blue-dark)}.pcard.is-posted{border-color:var(--blue)}
+.posted-summary{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin:0 0 22px;font:400 12px/1.6 var(--font-ui);color:var(--text)}.posted-summary strong{color:var(--blue-dark)}.posted-summary small{font-size:11px;color:var(--text-dim)}.posted-storage-error{color:#9d354a!important}
+@media(max-width:680px){.posting-checklist{padding:40px 0}.posted-list{grid-template-columns:1fr}.posted-control{padding:14px;gap:11px}.posting-checklist .section-head h2{font-size:30px}}
+@media print{.posting-checklist{display:none!important}}
 </style>
 <style id="scripts-download-style">
 .scripts-download{display:inline-flex;align-items:center;gap:13px;min-height:56px;margin-top:12px;padding:14px 20px;border:1px solid rgba(104,155,203,.32);border-radius:12px;background:var(--white);color:#3f6f9e;box-shadow:0 4px 14px rgba(27,58,92,.06);text-decoration:none;font:600 13px/1.35 var(--font-ui);transition:background .18s,box-shadow .18s,transform .18s}
@@ -3383,15 +3385,21 @@ Se dormir virou uma dificuldade frequente e isso está afetando seu dia, agende 
  var storageKey='arrive:daniele:posted:v1',state={},savingAvailable=true,records=[],summaries=[];
  try{var raw=JSON.parse(localStorage.getItem(storageKey)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw)){Object.keys(raw).forEach(function(k){if(raw[k]===true)state[k]=true})}}catch(e){savingAvailable=false}
  function summary(){summaries.forEach(function(rec){var group=records.filter(function(r){return r.month===rec.month}),done=group.filter(function(r){return state[r.key]===true}).length;rec.count.textContent=done+' de '+group.length+' postados';rec.note.textContent=savingAvailable?'Salvo neste navegador e dispositivo.':'Não foi possível salvar neste navegador. As marcações podem se perder ao fechar.';rec.note.classList.toggle('posted-storage-error',!savingAvailable)})}
- function paint(rec){var done=state[rec.key]===true;rec.input.checked=done;rec.card.classList.toggle('is-posted',done);rec.text.textContent=done?'Postado':'Marcar como postado'}
+ function paint(rec){var done=state[rec.key]===true;rec.input.checked=done;rec.card.classList.toggle('is-posted',done);rec.label.classList.toggle('is-posted',done);rec.text.textContent=done?'Postado':'Pendente'}
  function install(){
  document.querySelectorAll('[id^="grid-"]').forEach(function(grid){
   var month=grid.id.slice(5),cards=grid.querySelectorAll('.pcard');if(!cards.length)return;
-  var bar=document.createElement('div');bar.className='posted-summary';var count=document.createElement('strong'),note=document.createElement('small');count.setAttribute('aria-live','polite');bar.appendChild(count);bar.appendChild(note);grid.before(bar);summaries.push({month:month,count:count,note:note});
-  cards.forEach(function(card){
+  var section=document.createElement('section');section.className='posting-checklist';section.id='postados-'+month;
+  var container=document.createElement('div');container.className='container';section.appendChild(container);
+  var head=document.createElement('div');head.className='section-head';head.innerHTML='<span class="label">Controle de publicação</span><h2>O que já foi postado?</h2><p>Marque os conteúdos conforme publicar.</p>';container.appendChild(head);
+  var bar=document.createElement('div');bar.className='posted-summary';var count=document.createElement('strong'),note=document.createElement('small');count.setAttribute('aria-live','polite');bar.appendChild(count);bar.appendChild(note);container.appendChild(bar);summaries.push({month:month,count:count,note:note});
+  var list=document.createElement('div');list.className='posted-list';container.appendChild(list);grid.closest('section').after(section);
+  cards.forEach(function(card,index){
    var title=card.querySelector('.ptitle'),thumb=card.querySelector('[onclick*="lb("]'),identity=thumb?thumb.getAttribute('onclick'):(title?title.textContent.trim():'');var key=card.dataset.postId||month+'|'+identity;
-   var label=document.createElement('label');label.className='posted-control';var input=document.createElement('input');input.type='checkbox';input.setAttribute('aria-label','Postado: '+(title?title.textContent.trim():'conteúdo'));var text=document.createElement('span');label.appendChild(input);label.appendChild(text);var anchor=card.querySelector('.expand-btn');if(anchor)card.insertBefore(label,anchor);else card.appendChild(label);
-   var rec={month:month,key:key,card:card,input:input,text:text};records.push(rec);paint(rec);
+   var label=document.createElement('label');label.className='posted-control';var input=document.createElement('input');input.type='checkbox';input.setAttribute('aria-label','Postado: '+(title?title.textContent.trim():'conteúdo'));
+   var copy=document.createElement('span');copy.className='posted-copy';var format=document.createElement('span');format.className='posted-format';var type=(card.dataset.format||'conteúdo').split(' ')[0];format.textContent=String(index+1).padStart(2,'0')+' · '+({card:'Card',reel:'Reel',carrossel:'Carrossel',story:'Story'}[type]||type);copy.appendChild(format);copy.appendChild(document.createTextNode(title?title.textContent.trim():'Conteúdo '+(index+1)));
+   var text=document.createElement('span');text.className='posted-state';label.appendChild(input);label.appendChild(copy);label.appendChild(text);list.appendChild(label);
+   var rec={month:month,key:key,card:card,label:label,input:input,text:text};records.push(rec);paint(rec);
    input.addEventListener('change',function(){if(input.checked)state[key]=true;else delete state[key];try{localStorage.setItem(storageKey,JSON.stringify(state));savingAvailable=true}catch(e){savingAvailable=false}paint(rec);summary()});
   });
  });summary();
