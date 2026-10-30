@@ -341,7 +341,7 @@
     <button class="mtab" id="tab-outubro" onclick="switchMonth('outubro')">Mês 5</button>
     <button class="mtab" id="tab-novembro" onclick="switchMonth('novembro')">Mês 6</button>
   </div>
-  <span class="nav-tag" id="nav-tag">Mês 5 · Outubro 2026</span>
+  <span class="nav-tag" id="nav-tag">Mês 6 · Novembro 2026</span>
 </nav>
 
 
@@ -2949,13 +2949,9 @@ Quando o sono não melhora nem com rotina, o que está por trás costuma ser emo
       { key: 'outubro', y: 2026, m: 10 },
       { key: 'novembro', y: 2026, m: 11 }
     ];
-    var now = new Date();
-    var cur = now.getFullYear() * 12 + now.getMonth();
-    var best = months[0];
-    for (var i = 0; i < months.length; i++) {
-      var val = months[i].y * 12 + (months[i].m - 1);
-      if (val <= cur) best = months[i];
-    }
+    // Abre sempre no ultimo mes publicado, nao no mes do calendario:
+    // o entregavel fica pronto antes do mes comecar.
+    var best = months[months.length - 1];
     var requested = new URLSearchParams(location.search).get('mes');
     if (months.some(function (x) { return x.key === requested; })) best = months.find(function (x) { return x.key === requested; });
     window.addEventListener('DOMContentLoaded', function () { switchMonth(best.key); });
